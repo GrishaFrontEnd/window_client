@@ -10,22 +10,46 @@ import MyFileInput from "../../UI/MyFileInput";
 import DropdownCategory from "./DropdownCategory";
 import DropdownProperties from "./DropdownProperties";
 import { useFetchAllCategoriesQuery } from "../../Services/CategoriesApi";
+import { useFetchPropertiesByCategoryQuery } from "../../Services/PropertiesApi";
 
 const CreateItem: React.FC = () => {
   const { data: categories } = useFetchAllCategoriesQuery();
   const dispatch = useAppDispatch();
   const formData = new FormData();
-  const [_properties, set_Properties] = React.useState<IItemProperties[]>([
-    { property: "", value: "" },
-  ]);
   const [createItem, resultCreateItem] = useCreateItemMutation();
   const [categoryNum, setCategoryNum] = React.useState<number>(1);
-  const handleChangeCategory = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setCategoryNum(+e.target.value);
-  };
   const [properties, setProperties] = React.useState<IProperties[]>([
     { id: randomNumber(), property: "", value: "" },
   ]);
+  const {
+    data: categoryProperties,
+    error,
+    isLoading,
+  } = useFetchPropertiesByCategoryQuery(categoryNum);
+  const handleChangeCategory = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setCategoryNum(+e.target.value);
+    console.log(+e.target.value);
+    if (+e.target.value !== 1) {
+      let arr: IProperties[] = [];
+      categoryProperties.map((property) =>
+        arr.push({ property: property.title, value: "", id: randomNumber() })
+      );
+      console.log(arr);
+      setProperties(arr);
+    }
+  };
+  React.useEffect(() => {
+    setCategoryNum(categoryNum);
+    console.log(categoryNum);
+    if (categoryNum !== 1) {
+      let arr: IProperties[] = [];
+      categoryProperties.map((property) =>
+        arr.push({ property: property.title, value: "", id: randomNumber() })
+      );
+      console.log(arr);
+      setProperties(arr);
+    }
+  }, [categoryNum]);
   const [title, setTitle] = React.useState<string>("");
   const handleChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
@@ -91,9 +115,6 @@ const CreateItem: React.FC = () => {
     } catch (error) {
       console.log("rejected => ", error);
     }
-  };
-  const handleShowProperties = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
   };
   const handlePropertySelect = (
     e: React.ChangeEvent<HTMLSelectElement>,

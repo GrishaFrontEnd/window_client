@@ -14,19 +14,19 @@ const ItemPage: React.FC = () => {
     return <h1>Ошибка....</h1>;
   }
   return (
-    <section className="mx-auto max-h-fit max-w-6xl">
+    <section className="mx-auto max-h-fit max-w-screen-xl">
       <div className="lg:grid max-h-fit lg:grid-cols-2 lg:gap-0 sm:grid-cols-1 sm:grid">
-        <div className="mr-10 max-h-fit grid grid-rows-[1fr_1fr_10fr]">
+        <div className="mr-10 max-h-fit grid grid-rows-[1fr_1fr_6fr]">
           <h1 className="font-semibold sm:text-center text-4xl">
-            {item.title}
+            {item.item.title}
           </h1>
           <h2 className="my-4 text-2xl font-medium text-lime-700">
-            Цена: {item.price} руб
+            Цена: {item.item.price} руб
           </h2>
           <div className="overflow-hidden h-96">
             <img
               className="w-full h-full object-contain object-center"
-              src={process.env.REACT_APP_API + "/" + item.image}
+              src={process.env.REACT_APP_API + "/" + item.item.image}
               alt="item picture"
             />
           </div>
@@ -45,15 +45,15 @@ const ItemPage: React.FC = () => {
                 <th className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap">
                   Количество
                 </th>
-                <td className="py-4 px-6">{item.count} шт</td>
+                <td className="py-4 px-6">{item.item.count} шт</td>
               </tr>
               <tr className="bg-white border-b">
                 <th className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap">
                   Артикул
                 </th>
-                <td className="py-4 px-6">{item.id}</td>
+                <td className="py-4 px-6">{item.item.id}</td>
               </tr>
-              {item.properties.map((property, index) => {
+              {item._properties.map((property, index) => {
                 return (
                   <tr className="bg-white border-b" key={index}>
                     <th className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap">
@@ -68,7 +68,7 @@ const ItemPage: React.FC = () => {
         </div>
       </div>
       <div>
-        <EqualsItems category={item.category_id} />
+        <EqualsItems category={item.item.category_id} />
       </div>
     </section>
   );

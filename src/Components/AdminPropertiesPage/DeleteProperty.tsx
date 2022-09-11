@@ -23,7 +23,7 @@ const DeleteProperty: React.FC = () => {
   const handleClickDelete = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     try {
-      let id = properties.rows.find(
+      let id = properties.find(
         (property) => property.title === propertyName
       ).id;
       const payload = await deleteProperty(id).unwrap();

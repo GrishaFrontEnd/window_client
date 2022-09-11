@@ -28,22 +28,22 @@ const App: React.FC = () => {
           <Route path="service/:id" element={<ServicePage />} />
           <Route path="contacts" element={<ContactPage />} />
           <Route path="delivery" element={<DeliveryPage />} />
-          <Route path="/admin_panel" element={<PrivateOutlet />}>
-            <Route path="/admin_panel" element={<AdminPage />}>
-              <Route
-                path="/admin_panel/categories"
-                element={<AdminCategoriesPanel />}
-              />
-              <Route path="/admin_panel/items" element={<ItemAdminPanel />} />
-              <Route
-                path="/admin_panel/services"
-                element={<AdminServicePanel />}
-              />
-              <Route
-                path="/admin_panel/properties"
-                element={<AdminPropertiesPage />}
-              ></Route>
-            </Route>
+        </Route>
+        <Route path="/admin_panel" element={<PrivateOutlet />}>
+          <Route path="/admin_panel" element={<AdminPage />}>
+            <Route
+              path="/admin_panel/categories"
+              element={<AdminCategoriesPanel />}
+            />
+            <Route path="/admin_panel/items" element={<ItemAdminPanel />} />
+            <Route
+              path="/admin_panel/services"
+              element={<AdminServicePanel />}
+            />
+            <Route
+              path="/admin_panel/properties"
+              element={<AdminPropertiesPage />}
+            ></Route>
           </Route>
         </Route>
         <Route path="*" element={<NotFoundPage />} />

@@ -21,29 +21,23 @@ const ContactPage: React.FC = () => {
     "89962380144",
     "Оплата производится на наличному расчёту на территории склада, либо переводом на карту",
   ];
+  let tableContactItems = [];
+  for (let i = 0; i < rightAside.length; i++) {
+    tableContactItems.push(
+      <tr className="bg-white border-b">
+        <th className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap">
+          {leftAside[i]}
+        </th>
+        <td className="py-4 px-6">{rightAside[i]}</td>
+      </tr>
+    );
+  }
   return (
     <div className="max-w-screen-xl min-w-full min-h-fit">
       <div className="flex gap-2">
-        <div className="max-w-fit">
-          {leftAside.map((item, index) => (
-            <h2
-              className="font-medium mb-2 p-2 border border-lime-500 border-t-0 border-l-0 border-r-0 text-2xl"
-              key={index}
-            >
-              {item}:
-            </h2>
-          ))}
-        </div>
-        <div className="max-w-fit">
-          {rightAside.map((item, index) => (
-            <h2
-              className="font-normal mb-2 p-2 text-2xl border border-lime-500 border-t-0 border-l-0 border-r-0"
-              key={index}
-            >
-              {item}
-            </h2>
-          ))}
-        </div>
+        <table className="table-auto w-full text-xl text-left text-gray-500">
+          <tbody>{tableContactItems}</tbody>
+        </table>
       </div>
     </div>
   );

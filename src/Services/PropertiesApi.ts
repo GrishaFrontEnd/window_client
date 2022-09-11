@@ -2,6 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 import {
   ICreateProperty,
   IProperty,
+  IPropsCategory,
   IServerProperties,
   IUpdateProperty,
 } from "../Models/IProperty";
@@ -12,7 +13,7 @@ export const PropertiesApi = createApi({
   refetchOnFocus: true,
   refetchOnReconnect: true,
   refetchOnMountOrArgChange: true,
-  tagTypes: ["Properties", "ServerProperties"],
+  tagTypes: ["Properties"],
   baseQuery: fetchBaseQuery({
     baseUrl: `${process.env.REACT_APP_API_ADDRESS_DEVELOPMENT}/properties`,
     prepareHeaders: (headers, { getState }) => {
@@ -32,11 +33,11 @@ export const PropertiesApi = createApi({
       }),
       providesTags: [{ type: "Properties", id: "list" }],
     }),
-    fetchPropertiesByCategory: builder.query<IServerProperties, number>({
+    fetchPropertiesByCategory: builder.query<IPropsCategory[], number>({
       query: (category_id) => ({
         url: `?category_id=${category_id}`,
       }),
-      providesTags: ["ServerProperties"],
+      providesTags: ["Properties"],
     }),
     fetchPropertyById: builder.query<IProperty, number>({
       query: (id) => ({

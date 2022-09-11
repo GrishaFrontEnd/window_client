@@ -22,20 +22,20 @@ const MainLayout: React.FC = () => {
     }
   });
   return (
-    <div className="max-w-screen-xl mx-auto my-0 grid">
-      <div>
+    <div className="max-w-screen-xl flex items-center flex-col min-h-full mx-auto my-0">
+      <div className="flex items-center flex-col mt-5 pb-25">
         <Header />
-      </div>
-      <div className="flex h-100 items-center flex-col mt-5 ">
-        <div className="flex-1">
-          <Categories />
-          <div className="mt-5 min-w-full mx-auto">
-            <Outlet />
+        <div className="">
+          <div>
+            <Categories />
+            <div className="mt-5 min-w-full mx-auto">
+              <Outlet />
+            </div>
           </div>
         </div>
-        <div className="flex-none">
-          <Footer />
-        </div>
+      </div>
+      <div className="mt-[-25] h-25">
+        <Footer />
       </div>
     </div>
   );

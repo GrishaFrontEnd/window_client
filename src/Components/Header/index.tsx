@@ -12,7 +12,7 @@ const Header: React.FC = () => {
   const isAdmin = useAppSelector((state) => state.auth.isAdmin);
   const user = useAppSelector((state) => state.auth.user);
   return (
-    <div className="mt-3 flex items-center justify-between">
+    <div className="mt-3 grid md:grid-cols-4 gap-4">
       <div>
         <NavLink
           className="block border-lime-900 border border-t-0 border-r-0 p-3 pt-0"

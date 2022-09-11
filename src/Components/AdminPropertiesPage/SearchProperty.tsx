@@ -17,7 +17,9 @@ const SearchProperty: React.FC<ISearchProperty> = ({
     error,
     isLoading,
   } = useFetchPropertiesByCategoryQuery(category_id);
-  React.useEffect(() => {}, [category_id]);
+  React.useEffect(() => {
+    console.log(properties);
+  }, [category_id]);
   return (
     <div className="">
       {error && <h1>Произошла ошибка</h1>}
@@ -29,9 +31,9 @@ const SearchProperty: React.FC<ISearchProperty> = ({
           onChange={onChange}
           className="bg-gray-50 mb-4 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         >
-          {properties?.rows?.map((property, index) => {
+          {properties?.map((property, index) => {
             return (
-              <option key={property.id} value={property.title}>
+              <option key={index} value={property.id}>
                 {property.title}
               </option>
             );

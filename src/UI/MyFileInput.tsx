@@ -2,14 +2,16 @@ import React from "react";
 
 export interface IMyFileInput {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  value?: any;
 }
 
-const MyFileInput: React.FC<IMyFileInput> = ({ onChange }) => {
+const MyFileInput: React.FC<IMyFileInput> = ({ onChange, value }) => {
   return (
     <div>
       <input
         onChange={onChange}
         type="file"
+        value={value}
         className="m-5 block w-full text-sm text-slate-500
       file:mr-4 file:py-2 file:px-4
       file:rounded-full file:border-0

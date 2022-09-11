@@ -33,11 +33,10 @@ const UpdateProperty: React.FC = () => {
       console.log(
         value,
         newAttribute,
-        _properties.rows.find((property) => property.title === oldAttribute).id
+        _properties.find((property) => property.title === oldAttribute).id
       );
       const payload = await updateAttribute({
-        id: _properties.rows.find((property) => property.title === oldAttribute)
-          .id,
+        id: _properties.find((property) => property.title === oldAttribute).id,
         category_id: value,
         titleProperty: newAttribute,
       }).unwrap();

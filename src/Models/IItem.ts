@@ -14,6 +14,11 @@ export interface IProperties {
   value: string;
 }
 
+export interface IServerItem {
+  item: ServerItem;
+  _properties: IServerProperties[];
+}
+
 export interface IItemProperties {
   [index: string]: string;
   property: string;

@@ -1,22 +1,41 @@
+import debounce from "lodash.debounce";
 import React from "react";
 import SearchItemAdmin from "./SearchItemAdmin";
+import UpdateItemData from "./UpdateItemData";
 
 const UpdateItem: React.FC = () => {
+  const [value, setValue] = React.useState<string>("");
   const [isFound, setIsFound] = React.useState<boolean>(false);
+  const [id, setId] = React.useState<number>();
   const [searchString, setSearchString] = React.useState<string>("");
-  const handleChangeSearchString = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchString(e.target.value);
+  const handleClickItem = (e: React.MouseEvent<HTMLDivElement>, id: number) => {
+    setIsFound(true);
+    setValue("");
+    setSearchString("");
+    setId(id);
+    console.log(id, "event");
   };
-  const items: number[] = [1, 2, 3, 4, 5];
+  const updateSearchValue = React.useCallback(
+    debounce((str: string) => {
+      setSearchString(str);
+    }, 1500),
+    []
+  );
+  const onChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
+    updateSearchValue(e.target.value);
+    setIsFound(false);
+  };
   return (
     <section className="mt-4 min-w-full">
       <h1 className="font-bold mb-4 text-xl">Обновление товара</h1>
-      <SearchItemAdmin />
-      <div>
-        {searchString &&
-          items.map((item, index) => <div key={index}>{index}</div>)}
-      </div>
-      {isFound && <div></div>}
+      <SearchItemAdmin
+        onClick={handleClickItem}
+        onChange={onChangeSearch}
+        searchString={searchString}
+        value={value}
+      />
+      {isFound && <UpdateItemData item_id={id} />}
     </section>
   );
 };

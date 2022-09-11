@@ -10,6 +10,12 @@ export interface CategoriesProperty {
   property_id: number;
 }
 
+export interface IPropsCategory {
+  id: number;
+  title: string;
+  CategoriesProperty: CategoriesProperty;
+}
+
 export interface IServerProperties {
   count: number;
   rows: {

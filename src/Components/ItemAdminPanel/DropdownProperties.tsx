@@ -16,8 +16,11 @@ const DropdownProperties: React.FC<IDropdownProperties> = ({
     data: _properties,
     error,
     isLoading,
+    refetch,
   } = useFetchPropertiesByCategoryQuery(category_id);
-
+  React.useEffect(() => {
+    refetch();
+  }, [category_id]);
   if (error) {
     return <h1>Произошла ошибка</h1>;
   }
@@ -34,7 +37,7 @@ const DropdownProperties: React.FC<IDropdownProperties> = ({
         onChange={onChange}
         className="bg-gray-50 mb-4 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
       >
-        {_properties?.rows?.map((property, index) => {
+        {_properties?.map((property, index) => {
           return (
             <option key={index} value={property.title}>
               {property.title}

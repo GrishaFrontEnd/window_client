@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
-import { ServerItem, ServerResponse } from "../Models/IItem";
+import { IServerItem, ServerItem, ServerResponse } from "../Models/IItem";
 import { RootState } from "../Store/Store";
 
 export const ItemAPI = createApi({
@@ -26,7 +26,7 @@ export const ItemAPI = createApi({
       }),
       providesTags: ["Items"],
     }),
-    fetchItemById: build.query<ServerItem, number>({
+    fetchItemById: build.query<IServerItem, number>({
       query: (id) => ({
         url: `/${id}`,
       }),
