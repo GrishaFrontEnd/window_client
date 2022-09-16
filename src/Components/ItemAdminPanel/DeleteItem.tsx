@@ -13,7 +13,6 @@ const DeleteItem: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [deleteItem] = useDeleteItemMutation();
-  const [title, setTitle] = React.useState<string>("");
   const [value, setValue] = React.useState<string>("");
   const [isFound, setIsFound] = React.useState<boolean>(false);
   const [id, setId] = React.useState<number>();
@@ -23,7 +22,6 @@ const DeleteItem: React.FC = () => {
     setValue("");
     setSearchString("");
     setId(id);
-    console.log(id, "event");
   };
   const updateSearchValue = React.useCallback(
     debounce((str: string) => {
@@ -42,9 +40,7 @@ const DeleteItem: React.FC = () => {
       const payload = await deleteItem(id).unwrap();
       dispatch(removeItem(id));
       navigate("/admin_panel");
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   };
   return (
     <section className="mt-4 min-w-full">

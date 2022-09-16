@@ -43,9 +43,7 @@ const UpdateService: React.FC = () => {
       formData.append("description", description);
       formData.append("id", String(_service.id));
       const payload = await updateService(formData).unwrap();
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
   return (
     <section className="mt-4 min-w-full">

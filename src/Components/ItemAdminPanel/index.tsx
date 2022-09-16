@@ -12,7 +12,7 @@ const ItemAdminPanel: React.FC = () => {
       <h2 className="font-bold mb-4 text-xl">Товары</h2>
       <div className="flex flex-col items-center">
         <CreateItem />
-        <UpdateItem />
+        {/* <UpdateItem /> */}
         <DeleteItem />
       </div>
     </div>

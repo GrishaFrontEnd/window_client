@@ -17,9 +17,7 @@ const SearchProperty: React.FC<ISearchProperty> = ({
     error,
     isLoading,
   } = useFetchPropertiesByCategoryQuery(category_id);
-  React.useEffect(() => {
-    console.log(properties);
-  }, [category_id]);
+  React.useEffect(() => {}, [category_id]);
   return (
     <div className="">
       {error && <h1>Произошла ошибка</h1>}

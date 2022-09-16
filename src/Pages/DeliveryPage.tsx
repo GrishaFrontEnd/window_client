@@ -5,7 +5,7 @@ const DeliveryPage: React.FC = () => {
     <div className="max-w-screen-xl min-w-full min-h-fit">
       <div>
         <h1 className="text-4xl text-start font-bold mb-9">Доставка</h1>
-        <p className="text-start text-3xl">
+        <p className="text-start text-2xl">
           Доставка товаров осуществляется в пределах области. Межгород по
           договоренности.
         </p>

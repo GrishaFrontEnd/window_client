@@ -28,25 +28,21 @@ const CreateItem: React.FC = () => {
   } = useFetchPropertiesByCategoryQuery(categoryNum);
   const handleChangeCategory = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setCategoryNum(+e.target.value);
-    console.log(+e.target.value);
     if (+e.target.value !== 1) {
       let arr: IProperties[] = [];
       categoryProperties.map((property) =>
         arr.push({ property: property.title, value: "", id: randomNumber() })
       );
-      console.log(arr);
       setProperties(arr);
     }
   };
   React.useEffect(() => {
     setCategoryNum(categoryNum);
-    console.log(categoryNum);
     if (categoryNum !== 1) {
       let arr: IProperties[] = [];
       categoryProperties.map((property) =>
         arr.push({ property: property.title, value: "", id: randomNumber() })
       );
-      console.log(arr);
       setProperties(arr);
     }
   }, [categoryNum]);
@@ -112,9 +108,7 @@ const CreateItem: React.FC = () => {
       }
       const payload = await createItem(formData).unwrap();
       dispatch(addItem(payload));
-    } catch (error) {
-      console.log("rejected => ", error);
-    }
+    } catch (error) {}
   };
   const handlePropertySelect = (
     e: React.ChangeEvent<HTMLSelectElement>,

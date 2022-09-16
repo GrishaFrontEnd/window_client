@@ -1,5 +1,6 @@
 import React, { ChangeEvent, MutableRefObject } from "react";
 import { useNavigate } from "react-router-dom";
+import Footer from "../Components/Footer";
 import { useAppDispatch } from "../Hooks/Redux";
 import { useLoginMutation, useMeQuery } from "../Services/LoginService";
 import { setCredentials } from "../Store/Slices/AuthSlice";
@@ -46,19 +47,24 @@ const LoginPage: React.FC = () => {
     navigate("/");
   };
   return (
-    <div className="flex w-100 min-h-screen justify-center items-center">
-      <div className="border-2 rounded p-6 border-slate-400 self-center">
-        <h1 className="mb-10 text-center font-bold">Авторизация</h1>
-        <MyInput value={email} onChange={onChangeLogin} placeholder="Логин" />
-        <MyInput
-          value={password}
-          onChange={onChangePassword}
-          placeholder="Пароль"
-        />
-        <div className="flex justify-beetwen mt-4">
-          <MyButton onClick={onLogin} children="Отправить" />
-          <MyButton onClick={onClickRedirect} children="На главную" />
+    <div className="flex flex-col min-w-full min-h-screen justify-center items-center">
+      <div className="flex-[1_0_auto] flex items-center">
+        <div className="border-2 p-6 border-lime-400 self-center ">
+          <h1 className="mb-10 text-center text-3xl font-bold">Авторизация</h1>
+          <MyInput value={email} onChange={onChangeLogin} placeholder="Логин" />
+          <MyInput
+            value={password}
+            onChange={onChangePassword}
+            placeholder="Пароль"
+          />
+          <div className="flex justify-beetwen mt-4">
+            <MyButton onClick={onLogin} children="Отправить" />
+            <MyButton onClick={onClickRedirect} children="На главную" />
+          </div>
         </div>
+      </div>
+      <div className="flex-[0_0_auto] w-full">
+        <Footer />
       </div>
     </div>
   );

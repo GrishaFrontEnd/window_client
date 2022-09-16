@@ -12,27 +12,29 @@ const Header: React.FC = () => {
   const isAdmin = useAppSelector((state) => state.auth.isAdmin);
   const user = useAppSelector((state) => state.auth.user);
   return (
-    <div className="mt-3 grid md:grid-cols-4 gap-4">
+    <div className="mt-3 grid md:grid-cols-5 gap-4">
       <div>
-        <NavLink
-          className="block border-lime-900 border border-t-0 border-r-0 p-3 pt-0"
-          to="/"
-        >
+        <NavLink className="block" to="/">
           <h1 className="font-bold text-5xl">
             <span className="text-blue-700">Bu</span>
             <span className="italic">OKNA</span>
             <span className="text-blue-700">Yar</span>
           </h1>
-          <div className="text-xl font-bold">
-            Продажа б\у окон и дверей в Ярославле
-          </div>
         </NavLink>
+      </div>
+      <div className="px-2">
+        <div className="text-xl font-bold">
+          <div>Продажа б\у окон и</div>
+          <div> дверей в Ярославле</div>
+        </div>
       </div>
       <div className="text-xl font-medium">
         <div>
+          <div>Дни работы: </div>
           <div className="flex items-center">
             <MdCalendarToday className="mr-1" /> Без обеда и выходных
           </div>
+          <div>Часы работы:</div>
           <div className="flex items-center">
             {" "}
             <MdAccessTime className="mr-1" />

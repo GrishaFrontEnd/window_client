@@ -27,9 +27,7 @@ const DeleteProperty: React.FC = () => {
         (property) => property.title === propertyName
       ).id;
       const payload = await deleteProperty(id).unwrap();
-    } catch (error) {
-      console.log("rejected => ", error);
-    }
+    } catch (error) {}
   };
   if (error) {
     return <h1>Произошла ошибка</h1>;

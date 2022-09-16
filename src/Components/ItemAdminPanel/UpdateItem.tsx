@@ -13,7 +13,6 @@ const UpdateItem: React.FC = () => {
     setValue("");
     setSearchString("");
     setId(id);
-    console.log(id, "event");
   };
   const updateSearchValue = React.useCallback(
     debounce((str: string) => {
@@ -35,7 +34,7 @@ const UpdateItem: React.FC = () => {
         searchString={searchString}
         value={value}
       />
-      {isFound && <UpdateItemData item_id={id} />}
+      {isFound && <UpdateItemData cat_id={12} item_id={id} />}
     </section>
   );
 };

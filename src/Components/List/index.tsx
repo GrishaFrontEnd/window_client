@@ -16,7 +16,7 @@ const List: React.FC = () => {
   );
   let resultSearchString = `?category_id=${activeCategory}${
     searchString ? "&title=" + searchString : ""
-  }&page=${currentPage}&limit=16`;
+  }&page=${currentPage}&limit=18`;
   const {
     data: response,
     error,
@@ -34,7 +34,7 @@ const List: React.FC = () => {
     : undefined;
   React.useEffect(() => {
     dispatch(setItems(response?.rows));
-    dispatch(setPageCount(Math.ceil(response?.count / 16)));
+    dispatch(setPageCount(Math.ceil(response?.rows.length / 18)));
   }, [response?.rows]);
   if (error) {
     return <h1>Ошибка</h1>;
@@ -42,11 +42,11 @@ const List: React.FC = () => {
     return <h1>Загрузка</h1>;
   }
   return (
-    <div className="mt-10 min-w-full">
+    <div className="mt-10 mx-auto min-w-full ">
       {error && <h1>Ошибка...</h1>}
       {isLoading && <h1>Идет загрузка</h1>}
       {
-        <div className="ml-4 sm:grid-cols-2 grid lg:grid-cols-4 lg:gap-4 sm:grid-gap-2 grid-rows-10 max-w-fit">
+        <div className="ml-4 sm:grid-cols-2 md:grid-cols-3 grid lg:grid-cols-4 xl:grid-cols-5 lg:gap-4 sm:grid-gap-2 2xl:grid-cols-6 grid-rows-10 max-w-fit">
           {itemsMap}
         </div>
       }

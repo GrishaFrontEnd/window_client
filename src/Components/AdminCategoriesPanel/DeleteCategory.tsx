@@ -22,9 +22,7 @@ const AdminDeleteCategory: React.FC = () => {
     try {
       const payload = await deleteCategory(value).unwrap();
       refetch();
-    } catch (error) {
-      console.log("rejected => ", error);
-    }
+    } catch (error) {}
   };
   if (error) {
     return <h1>Ошибка</h1>;

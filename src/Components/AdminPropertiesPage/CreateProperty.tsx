@@ -20,14 +20,11 @@ const CreateProperty: React.FC = () => {
   ) => {
     e.preventDefault();
     try {
-      console.log(property, value);
       const payload = await createProperty({
         title: property,
         category_id: value,
       }).unwrap();
-    } catch (err) {
-      console.log("rejected => ", err);
-    }
+    } catch (err) {}
   };
   if (isLoading) {
     return <h1>Идет загрузка</h1>;

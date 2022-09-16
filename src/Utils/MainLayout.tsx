@@ -22,10 +22,10 @@ const MainLayout: React.FC = () => {
     }
   });
   return (
-    <div className="max-w-screen-xl flex items-center flex-col min-h-full mx-auto my-0">
-      <div className="flex items-center flex-col mt-5 pb-25">
+    <div className="min-w-full flex items-center flex-col min-h-screen mx-auto">
+      <div className="flex min-w-fit items-center flex-col mt-5 flex-[1_0_auto]">
         <Header />
-        <div className="">
+        <div className="w-full">
           <div>
             <Categories />
             <div className="mt-5 min-w-full mx-auto">
@@ -34,7 +34,7 @@ const MainLayout: React.FC = () => {
           </div>
         </div>
       </div>
-      <div className="mt-[-25] h-25">
+      <div className="flex-[0_0_auto] w-full">
         <Footer />
       </div>
     </div>

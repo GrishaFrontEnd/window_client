@@ -27,9 +27,7 @@ const CreateService: React.FC = () => {
       formData.append("title", title);
       formData.append("description", description);
       const payload = await createService(formData).unwrap();
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
   return (
     <section className="mt-4 min-w-full">

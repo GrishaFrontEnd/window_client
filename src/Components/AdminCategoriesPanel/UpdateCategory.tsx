@@ -27,15 +27,12 @@ const AdminUpdateCategory: React.FC = () => {
   const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     try {
-      console.log(value, newName);
       const payload = await updateCategory({
         oldValue: value,
         newValue: newName,
       }).unwrap();
       refetch();
-    } catch (error) {
-      console.log("rejected => ", error);
-    }
+    } catch (error) {}
   };
   if (error) {
     return <h1>Ошибка</h1>;

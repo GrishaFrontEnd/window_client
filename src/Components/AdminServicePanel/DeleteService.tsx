@@ -32,9 +32,7 @@ const DeleteService: React.FC = () => {
       dispatch(removeService({ id: _service.id }));
       navigate("/");
       alert("Успешно");
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
   return (
     <section className="mt-4 min-w-full">

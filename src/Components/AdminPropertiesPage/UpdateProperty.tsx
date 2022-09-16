@@ -30,19 +30,12 @@ const UpdateProperty: React.FC = () => {
   const handleClickUpdate = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     try {
-      console.log(
-        value,
-        newAttribute,
-        _properties.find((property) => property.title === oldAttribute).id
-      );
       const payload = await updateAttribute({
         id: _properties.find((property) => property.title === oldAttribute).id,
         category_id: value,
         titleProperty: newAttribute,
       }).unwrap();
-    } catch (error) {
-      console.log("rejected => ", error);
-    }
+    } catch (error) {}
   };
   if (error) {
     return <h1>Произошла ошибка</h1>;

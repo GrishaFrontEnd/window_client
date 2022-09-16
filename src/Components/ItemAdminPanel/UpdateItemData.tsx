@@ -11,20 +11,21 @@ import UpdateProperties from "./UpdateProperties";
 
 interface IUpdateItemData {
   item_id: number;
+  cat_id: number;
 }
 
-const UpdateItemData: React.FC<IUpdateItemData> = ({ item_id }) => {
+const UpdateItemData: React.FC<IUpdateItemData> = ({ item_id, cat_id }) => {
   const formData = new FormData();
   const { data: item, error, isLoading } = useFetchItemByIdQuery(item_id);
-  const [title, setTitle] = React.useState<string>(item.item.title);
+  const [title, setTitle] = React.useState<string>("");
   const handleChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
   };
-  const [price, setPrice] = React.useState<number>(item.item.price);
+  const [price, setPrice] = React.useState<number>();
   const handleChangePrice = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPrice(+e.target.value);
   };
-  const [count, setCount] = React.useState<number>(item.item.count);
+  const [count, setCount] = React.useState<number>();
   const handleChangeCount = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCount(+e.target.value);
   };
@@ -32,9 +33,7 @@ const UpdateItemData: React.FC<IUpdateItemData> = ({ item_id }) => {
   const handleChangePopup = (e: React.MouseEvent<HTMLButtonElement>) => {
     setIsOpenPopup(!isOpenPopup);
   };
-  const [category_id, setCategory_id] = React.useState<number>(
-    item.item.category_id
-  );
+  const [category_id, setCategory_id] = React.useState<number>(cat_id);
   const handleChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files[0];
     formData.append("image", file);
@@ -46,25 +45,21 @@ const UpdateItemData: React.FC<IUpdateItemData> = ({ item_id }) => {
     useFetchPropertiesByCategoryQuery(category_id);
   const handleChangeCategory = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setCategory_id(+e.target.value);
-    console.log(+e.target.value);
     if (+e.target.value !== 1) {
       let arr: IProperties[] = [];
       categoryProperties.map((property) =>
         arr.push({ property: property.title, value: "", id: randomNumber() })
       );
-      console.log(arr);
       setProperties(arr);
     }
   };
   React.useEffect(() => {
     setCategory_id(category_id);
-    console.log(category_id);
     if (category_id !== 1) {
       let arr: IProperties[] = [];
       categoryProperties.map((property) =>
         arr.push({ property: property.title, value: "", id: randomNumber() })
       );
-      console.log(arr);
       setProperties(arr);
     }
   }, [category_id]);
@@ -145,19 +140,19 @@ const UpdateItemData: React.FC<IUpdateItemData> = ({ item_id }) => {
             </div>
             <div>
               <MyInput
-                placeholder="Название предмета"
-                value={item.item.title}
+                placeholder={item.item.title}
+                value={title}
                 onChange={handleChangeTitle}
               />
               <MyInput
                 onChange={handleChangePrice}
-                placeholder="Цена предмета"
-                value={item.item.price}
+                placeholder={String(item.item.price)}
+                value={price}
               />
               <MyInput
-                placeholder="Количество товара"
+                placeholder={String(item.item.count)}
                 onChange={handleChangeCount}
-                value={item.item.count}
+                value={count}
               />
               <DropdownCategory
                 onChange={handleChangeCategory}
@@ -165,7 +160,7 @@ const UpdateItemData: React.FC<IUpdateItemData> = ({ item_id }) => {
               />
               <UpdateProperties
                 id={item_id}
-                category_id={item.item.id}
+                category_id={item.item.category_id}
                 handlePropertySelect={handlePropertySelect}
                 handleValueChange={handleValueChange}
                 handleRemoveProperty={handleRemoveProperty}
