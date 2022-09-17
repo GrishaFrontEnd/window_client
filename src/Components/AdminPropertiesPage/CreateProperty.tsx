@@ -20,7 +20,7 @@ const CreateProperty: React.FC = () => {
   ) => {
     e.preventDefault();
     try {
-      const payload = await createProperty({
+      await createProperty({
         title: property,
         category_id: value,
       }).unwrap();

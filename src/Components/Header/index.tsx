@@ -1,40 +1,31 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { useAppSelector } from "../../Hooks/Redux";
 import { FaWhatsapp, FaPhone } from "react-icons/fa";
-import {
-  MdAccessTime,
-  MdCalendarToday,
-  MdOutlineAdminPanelSettings,
-} from "react-icons/md";
+import { MdAccessTime, MdCalendarToday } from "react-icons/md";
 
 const Header: React.FC = () => {
-  const isAdmin = useAppSelector((state) => state.auth.isAdmin);
-  const user = useAppSelector((state) => state.auth.user);
   return (
-    <div className="mt-3 grid md:grid-cols-5 gap-4">
-      <div>
+    <div className="pt-3 flex flex-col items-start justify-center md:grid md:grid-cols-4 md:gap-4 w-full mx-auto">
+      <div className="my-3 md:my-0">
         <NavLink className="block" to="/">
-          <h1 className="font-bold text-5xl">
+          <h1 className="font-bold text-2xl md:text-3xl lg:text-4xl">
             <span className="text-blue-700">Bu</span>
             <span className="italic">OKNA</span>
             <span className="text-blue-700">Yar</span>
           </h1>
         </NavLink>
       </div>
-      <div className="px-2">
+      <div className="my-3 md:my-0">
         <div className="text-xl font-bold">
           <div>Продажа б\у окон и</div>
           <div> дверей в Ярославле</div>
         </div>
       </div>
-      <div className="text-xl font-medium">
+      <div className="text-xl font-medium my-3 md:my-0">
         <div>
-          <div>Дни работы: </div>
           <div className="flex items-center">
             <MdCalendarToday className="mr-1" /> Без обеда и выходных
           </div>
-          <div>Часы работы:</div>
           <div className="flex items-center">
             {" "}
             <MdAccessTime className="mr-1" />
@@ -42,46 +33,26 @@ const Header: React.FC = () => {
           </div>
         </div>
       </div>
-      <div className="text-xl font-bold">
+      <div className="text-xl font-bold my-3 md:my-0">
         <div>
           {" "}
-          <a
-            className="flex items-center"
-            target="_blank"
-            href="callto:+79999999999"
-          >
+          <div className="flex items-center">
             <FaPhone />
-            <div className="ml-2">89962380144</div>
-          </a>
+            <div className="ml-2">+79959864777</div>
+          </div>
         </div>
         <div>
           {" "}
           <a
             className="flex items-center"
             target="_blank"
-            href="https://wa.me/+79962380144"
+            href="https://wa.me/+79959864777"
           >
             <FaWhatsapp />
-            <div className="ml-2">89962380144</div>
+            <div className="ml-2">+79959864777</div>
           </a>
         </div>
       </div>
-      {user && (
-        <div className="font-bold self-center">
-          <div>Вы залогинены как</div>
-          <div> {user}</div>
-          {isAdmin && (
-            <NavLink
-              to="/admin_panel"
-              className="flex items-center p-3 hover:bg-lime-400 rounded-lg"
-            >
-              {" "}
-              <MdOutlineAdminPanelSettings className="mr-1" /> Панель
-              администратора
-            </NavLink>
-          )}
-        </div>
-      )}
     </div>
   );
 };

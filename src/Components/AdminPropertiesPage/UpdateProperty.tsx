@@ -30,7 +30,7 @@ const UpdateProperty: React.FC = () => {
   const handleClickUpdate = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     try {
-      const payload = await updateAttribute({
+      await updateAttribute({
         id: _properties.find((property) => property.title === oldAttribute).id,
         category_id: value,
         titleProperty: newAttribute,

@@ -21,6 +21,11 @@ const PrivateOutlet: React.FC = () => {
   });
   const auth = useAuth();
   const location = useLocation();
+  if (error) {
+    return <h1>Произошла ошибка при авторизации</h1>;
+  } else if (isLoading) {
+    return <h1>Идет аутентификация</h1>;
+  }
   return auth.user || window.localStorage.getItem("token") ? (
     <Outlet />
   ) : (

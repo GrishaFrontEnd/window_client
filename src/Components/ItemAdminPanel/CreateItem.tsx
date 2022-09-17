@@ -128,6 +128,11 @@ const CreateItem: React.FC = () => {
     _properties = _properties.filter((property) => property.id !== id);
     setProperties(_properties);
   };
+  if (error) {
+    <h1>Произошла ошибка</h1>;
+  } else if (isLoading) {
+    return <h1>Идет загрузка</h1>;
+  }
   return (
     <div className="mt-4 min-w-full">
       <h2 className="font-bold mb-4 text-xl">Создание товара</h2>

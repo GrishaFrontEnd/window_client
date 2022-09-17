@@ -26,7 +26,7 @@ const CreateService: React.FC = () => {
     try {
       formData.append("title", title);
       formData.append("description", description);
-      const payload = await createService(formData).unwrap();
+      await createService(formData).unwrap();
     } catch (error) {}
   };
   return (

@@ -1,6 +1,6 @@
 import React from "react";
+import { Helmet } from "react-helmet-async";
 import { useParams } from "react-router-dom";
-import { JsxElement } from "typescript";
 import EqualsItems from "../Components/EqualsItems";
 import { useFetchItemByIdQuery } from "../Services/ItemService";
 
@@ -15,19 +15,27 @@ const ItemPage: React.FC = () => {
   }
   return (
     <section className="mx-auto max-h-fit max-w-screen-xl">
+      <Helmet>
+        <title>{item.item.title}</title>
+        <meta name="description" content="Купить новые и бу ПВХ окна/двери" />
+        <meta
+          name="keywords"
+          content="купить окно, купить дверь, купить пвх окно, купить металлическую дверь, buoknoyar, бу окно, новое окно пвх, "
+        />
+      </Helmet>
       <div className="lg:grid max-h-fit lg:grid-cols-2 lg:gap-0 sm:grid-cols-1 sm:grid">
         <div className="mr-10 max-h-fit grid grid-rows-[1fr_1fr_6fr]">
-          <h1 className="font-semibold sm:text-center text-4xl">
+          <h1 className="font-semibold text-start text-4xl">
             {item.item.title}
           </h1>
-          <h2 className="my-4 text-2xl font-medium text-lime-700">
+          <h2 className="my-2 text-2xl font-medium text-lime-700">
             Цена: {item.item.price} руб
           </h2>
           <div className="overflow-hidden h-96">
             <img
               className="w-full h-full object-contain object-center"
               src={process.env.REACT_APP_API + "/" + item.item.image}
-              alt="item picture"
+              alt="Изображение товара"
             />
           </div>
         </div>

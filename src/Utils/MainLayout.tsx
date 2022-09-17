@@ -21,9 +21,14 @@ const MainLayout: React.FC = () => {
       );
     }
   });
+  if (error) {
+    return <h1>Произошла ошибка при загрузке сайта</h1>;
+  } else if (isLoading) {
+    return <h1>Идёт загрузка данных</h1>;
+  }
   return (
     <div className="min-w-full flex items-center flex-col min-h-screen mx-auto">
-      <div className="flex min-w-fit items-center flex-col mt-5 flex-[1_0_auto]">
+      <div className="flex min-w-fit items-center flex-col flex-[1_0_auto]">
         <Header />
         <div className="w-full">
           <div>

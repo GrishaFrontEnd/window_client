@@ -4,7 +4,7 @@ import { setCurrentPage } from "../../Store/Slices/ItemSlice";
 
 const Pagination: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { currentPage, items, pageCount } = useAppSelector(
+  const { currentPage, pageCount } = useAppSelector(
     (state) => state.itemReducer
   );
   let arrNum: number[] = [];

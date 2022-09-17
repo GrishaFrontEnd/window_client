@@ -3,7 +3,6 @@ import {
   ICreateProperty,
   IProperty,
   IPropsCategory,
-  IServerProperties,
   IUpdateProperty,
 } from "../Models/IProperty";
 import { RootState } from "../Store/Store";

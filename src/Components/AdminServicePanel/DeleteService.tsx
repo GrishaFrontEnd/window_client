@@ -10,7 +10,7 @@ import MyButton from "../../UI/MyButton";
 
 const DeleteService: React.FC = () => {
   const navigate = useNavigate();
-  const [deleteSerivce, resultDeleteService] = useDeleteServiceMutation();
+  const [deleteSerivce] = useDeleteServiceMutation();
   const dispatch = useAppDispatch();
   const { data: _services, error, isLoading } = useFetchAllServicesQuery();
   React.useEffect(() => {
@@ -28,12 +28,16 @@ const DeleteService: React.FC = () => {
   ) => {
     e.preventDefault();
     try {
-      const payload = await deleteSerivce(value).unwrap();
+      await deleteSerivce(value).unwrap();
       dispatch(removeService({ id: _service.id }));
       navigate("/");
-      alert("Успешно");
     } catch (error) {}
   };
+  if (error) {
+    return <h1>Произошла ошибка при загрузке данных</h1>;
+  } else if (isLoading) {
+    return <h1>Идет загрузка данных</h1>;
+  }
   return (
     <section className="mt-4 min-w-full">
       <h2 className="font-bold mb-4 text-xl">Удаление услуги</h2>

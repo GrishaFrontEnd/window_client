@@ -13,12 +13,15 @@ const AdminServicePanel: React.FC = () => {
     dispatch(setServices(_services));
   }, [_services]);
   const { services } = useAppSelector((state) => state.service);
+  if (error) {
+    return <h1>Произошла ошибка при загрузке данных</h1>;
+  } else if (isLoading) {
+    return <h1>Идёт загрузка данных</h1>;
+  }
   return (
     <div className="flex-column min-w-full">
       <h1 className="font-bold mb-4 text-xl">Оказываемые услги</h1>
       <CreateService />
-      {isLoading && <h1>Идет загурзка</h1>}
-      {error && <h1>Ошибка</h1>}
       {services?.length >= 1 ? (
         <div>
           <UpdateService />

@@ -1,5 +1,5 @@
 import React from "react";
-import { useAppDispatch, useAppSelector } from "../../Hooks/Redux";
+import { useAppDispatch } from "../../Hooks/Redux";
 import { setSearchString } from "../../Store/Slices/ItemSlice";
 import debounce from "lodash.debounce";
 import { useFetchAllCategoriesQuery } from "../../Services/CategoriesApi";
@@ -21,7 +21,7 @@ const ButtonSearch: React.FC = () => {
     setCategory(str);
     dispatch(
       setActiveCategories(
-        categories.find((category) => category.value == str).id
+        categories.find((category) => category.value === str).id
       )
     );
     setVisiblePopup(false);
@@ -69,7 +69,6 @@ const ButtonSearch: React.FC = () => {
 const SearchItem: React.FC = () => {
   const [value, setValue] = React.useState<string>("");
   const dispatch = useAppDispatch();
-  const { searchString } = useAppSelector((state) => state.itemReducer);
   const updateSearchValue = React.useCallback(
     debounce((str: string) => {
       dispatch(setSearchString(str));

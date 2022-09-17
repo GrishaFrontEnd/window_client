@@ -1,4 +1,4 @@
-import React, { ComponentProps, forwardRef, InputHTMLAttributes } from "react";
+import React, { InputHTMLAttributes } from "react";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;

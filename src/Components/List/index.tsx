@@ -11,9 +11,7 @@ const List: React.FC = () => {
   const { searchString, currentPage } = useAppSelector(
     (state) => state.itemReducer
   );
-  const { categories, activeCategory } = useAppSelector(
-    (state) => state.categories
-  );
+  const { activeCategory } = useAppSelector((state) => state.categories);
   let resultSearchString = `?category_id=${activeCategory}${
     searchString ? "&title=" + searchString : ""
   }&page=${currentPage}&limit=18`;
@@ -46,7 +44,7 @@ const List: React.FC = () => {
       {error && <h1>Ошибка...</h1>}
       {isLoading && <h1>Идет загрузка</h1>}
       {
-        <div className="ml-4 sm:grid-cols-2 md:grid-cols-3 grid lg:grid-cols-4 xl:grid-cols-5 lg:gap-4 sm:grid-gap-2 2xl:grid-cols-6 grid-rows-10 max-w-fit">
+        <div className="mx-auto ml-4 sm:grid-cols-2 md:grid-cols-3 grid lg:grid-cols-4 xl:grid-cols-5 lg:gap-4 sm:grid-gap-2 2xl:grid-cols-6 grid-rows-10 max-w-fit">
           {itemsMap}
         </div>
       }

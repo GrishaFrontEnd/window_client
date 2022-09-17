@@ -5,7 +5,6 @@ import { useAppDispatch } from "../../Hooks/Redux";
 import { useDeleteItemMutation } from "../../Services/ItemService";
 import { removeItem } from "../../Store/Slices/ItemSlice";
 import MyButton from "../../UI/MyButton";
-import MyInput from "../../UI/MyInput";
 import DeleteItemData from "./DeleteItemData";
 import SearchItemAdmin from "./SearchItemAdmin";
 
@@ -37,7 +36,7 @@ const DeleteItem: React.FC = () => {
   const handleClickDelete = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     try {
-      const payload = await deleteItem(id).unwrap();
+      await deleteItem(id).unwrap();
       dispatch(removeItem(id));
       navigate("/admin_panel");
     } catch (err) {}

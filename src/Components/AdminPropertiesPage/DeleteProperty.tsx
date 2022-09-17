@@ -5,7 +5,6 @@ import {
   useFetchPropertiesByCategoryQuery,
 } from "../../Services/PropertiesApi";
 import MyButton from "../../UI/MyButton";
-import MyInput from "../../UI/MyInput";
 import SearchProperty from "./SearchProperty";
 
 const DeleteProperty: React.FC = () => {
@@ -26,7 +25,7 @@ const DeleteProperty: React.FC = () => {
       let id = properties.find(
         (property) => property.title === propertyName
       ).id;
-      const payload = await deleteProperty(id).unwrap();
+      await deleteProperty(id).unwrap();
     } catch (error) {}
   };
   if (error) {

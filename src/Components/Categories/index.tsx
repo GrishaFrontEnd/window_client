@@ -1,12 +1,12 @@
 import React from "react";
-import { useAppDispatch } from "../../Hooks/Redux";
+import { useAppDispatch, useAppSelector } from "../../Hooks/Redux";
 import { NavLink } from "react-router-dom";
 import { useFetchAllCategoriesQuery } from "../../Services/CategoriesApi";
 import {
   setActiveCategories,
   setCategories,
 } from "../../Store/Slices/CategoriesSlice";
-import { MdOutlineMenuOpen } from "react-icons/md";
+import { MdOutlineAdminPanelSettings, MdOutlineMenuOpen } from "react-icons/md";
 import CategoriesServices from "./CategoriesServices.tsx";
 import {
   MdOutlineImportContacts,
@@ -15,6 +15,7 @@ import {
 } from "react-icons/md";
 
 const Categories: React.FC = () => {
+  const isAdmin = useAppSelector((state) => state.auth.isAdmin);
   const { data: categories, error, isLoading } = useFetchAllCategoriesQuery();
   React.useEffect(() => {
     dispatch(setCategories(categories));
@@ -22,6 +23,7 @@ const Categories: React.FC = () => {
   const dispatch = useAppDispatch();
   const onClickCategory = (e: React.MouseEvent<HTMLLIElement>, num: number) => {
     dispatch(setActiveCategories(num));
+    setIsOpenBurger(false);
   };
   const [dropdownCategory, setDropdownCategory] =
     React.useState<boolean>(false);
@@ -43,6 +45,11 @@ const Categories: React.FC = () => {
   const handleClickBurger = (e: React.MouseEvent<HTMLSpanElement>) => {
     setIsOpenBurger(!isOpenBurger);
   };
+  if (error) {
+    return <h1>Произошла ошибка при загрузке данных</h1>;
+  } else if (isLoading) {
+    return <h1>Идет загрузка данных</h1>;
+  }
   return (
     <div className="min-w-full mx-auto text-xl p-1">
       <span
@@ -62,6 +69,9 @@ const Categories: React.FC = () => {
           onMouseOut={handleMouseOutCategory}
           onMouseOver={handleMouseOverCategory}
           className="relative"
+          onClick={(e: React.MouseEvent<HTMLLIElement>) =>
+            setIsOpenBurger(false)
+          }
         >
           <h2 className="cursor-pointer font-semibold hover:rounded-lg hover:text-white hover:bg-lime-400 p-3">
             <NavLink to="/" className="flex items-center">
@@ -105,24 +115,53 @@ const Categories: React.FC = () => {
           onMouseOut={handleMouseOutServices}
           onMouseOver={handleMouseOverServices}
           className="relative"
+          onClick={(e: React.MouseEvent<HTMLLIElement>) =>
+            setIsOpenBurger(false)
+          }
         >
           <CategoriesServices dropdownServices={dropdownServices} />
         </li>
-        <li className="my-2 font-semibold hover:rounded-lg hover:text-white hover:bg-lime-400 p-3">
+        <li
+          className="my-2 font-semibold hover:rounded-lg hover:text-white hover:bg-lime-400 p-3"
+          onClick={(e: React.MouseEvent<HTMLLIElement>) =>
+            setIsOpenBurger(false)
+          }
+        >
           <NavLink to="/contacts" className="flex items-center">
             <MdOutlinePaid className="mr-1" /> Контакты/Оплата
           </NavLink>
         </li>
-        <li className="my-2 font-semibold hover:rounded-lg hover:text-white hover:bg-lime-400 p-3">
+        <li
+          className="my-2 font-semibold hover:rounded-lg hover:text-white hover:bg-lime-400 p-3"
+          onClick={(e: React.MouseEvent<HTMLLIElement>) =>
+            setIsOpenBurger(false)
+          }
+        >
           <NavLink to="/delivery" className="flex items-center">
             <MdOutlineDeliveryDining className="mr-1 hover:text-white" />{" "}
             Доставка
           </NavLink>
         </li>
-        <li className="font-semibold hover:rounded-lg hover:text-white hover:bg-lime-400 p-3">
-          <NavLink to="/login" className="flex items-center">
-            <MdOutlineImportContacts className="mr-1" /> Личный кабинет
-          </NavLink>
+        <li
+          className="font-semibold hover:rounded-lg hover:text-white hover:bg-lime-400 p-3"
+          onClick={(e: React.MouseEvent<HTMLLIElement>) =>
+            setIsOpenBurger(false)
+          }
+        >
+          {isAdmin ? (
+            <NavLink
+              to="/admin_panel"
+              className="flex items-center p-3 hover:bg-lime-400 rounded-lg"
+            >
+              {" "}
+              <MdOutlineAdminPanelSettings className="mr-1" /> Панель
+              администратора
+            </NavLink>
+          ) : (
+            <NavLink to="/login" className="flex items-center">
+              <MdOutlineImportContacts className="mr-1" /> Личный кабинет
+            </NavLink>
+          )}
         </li>
       </ul>
     </div>

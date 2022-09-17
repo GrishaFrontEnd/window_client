@@ -20,7 +20,7 @@ const AdminDeleteCategory: React.FC = () => {
   const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     try {
-      const payload = await deleteCategory(value).unwrap();
+      await deleteCategory(value).unwrap();
       refetch();
     } catch (error) {}
   };

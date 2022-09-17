@@ -118,19 +118,15 @@ const FooterNavbar: React.FC = () => {
         <a
           className="flex items-center my-2 p-2 border-b-2 hover:bg-lime-300 rounded-lg hover:text-white"
           target="_blank"
-          href="https://wa.me/+79962380144"
+          href="https://wa.me/+79959864777"
         >
           <FaWhatsapp />
-          <div className="ml-2">89962380144</div>
+          <div className="ml-2">+79959864777</div>
         </a>
-        <a
-          className="flex items-center my-2 p-2 border-b-2 hover:bg-lime-300 rounded-lg hover:text-white"
-          target="_blank"
-          href="callto:+79999999999"
-        >
+        <div className="flex items-center my-2 p-2 border-b-2 hover:bg-lime-300 rounded-lg hover:text-white">
           <FaPhone />
-          <div className="ml-2">89962380144</div>
-        </a>
+          <div className="ml-2">+79959864777</div>
+        </div>
       </div>
     </div>
   );

@@ -1,5 +1,4 @@
 import React from "react";
-import { useAppDispatch } from "../../Hooks/Redux";
 import {
   useFetchAllCategoriesQuery,
   useUpdateCategoryMutation,
@@ -8,7 +7,6 @@ import MyButton from "../../UI/MyButton";
 import MyInput from "../../UI/MyInput";
 
 const AdminUpdateCategory: React.FC = () => {
-  const dispatch = useAppDispatch();
   const {
     data: categories,
     error,
@@ -27,7 +25,7 @@ const AdminUpdateCategory: React.FC = () => {
   const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     try {
-      const payload = await updateCategory({
+      await updateCategory({
         oldValue: value,
         newValue: newName,
       }).unwrap();
@@ -50,7 +48,7 @@ const AdminUpdateCategory: React.FC = () => {
       >
         {categories.map((category, index) => {
           return (
-            <option key={category.id} value={category.value}>
+            <option key={index} value={category.value}>
               {category.value}
             </option>
           );

@@ -1,4 +1,5 @@
-import React, { ChangeEvent, MutableRefObject } from "react";
+import React, { ChangeEvent } from "react";
+import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
 import Footer from "../Components/Footer";
 import { useAppDispatch } from "../Hooks/Redux";
@@ -8,7 +9,7 @@ import MyButton from "../UI/MyButton";
 import MyInput from "../UI/MyInput";
 
 const LoginPage: React.FC = () => {
-  const { data: response, error } = useMeQuery("");
+  const { data: response } = useMeQuery("");
   React.useEffect(() => {
     if (window.localStorage.getItem("token")) {
       dispatch(
@@ -24,7 +25,7 @@ const LoginPage: React.FC = () => {
   const [password, setPassword] = React.useState<string>("");
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const [login, { isLoading }] = useLoginMutation();
+  const [login] = useLoginMutation();
   const onChangeLogin = (e: ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
@@ -48,6 +49,14 @@ const LoginPage: React.FC = () => {
   };
   return (
     <div className="flex flex-col min-w-full min-h-screen justify-center items-center">
+      <Helmet>
+        <title>Авторизация</title>
+        <meta name="description" content="Купить новые и бу ПВХ окна/двери" />
+        <meta
+          name="keywords"
+          content="купить окно, купить дверь, купить пвх окно, купить металлическую дверь, buoknoyar, бу окно, новое окно пвх, "
+        />
+      </Helmet>
       <div className="flex-[1_0_auto] flex items-center">
         <div className="border-2 p-6 border-lime-400 self-center ">
           <h1 className="mb-10 text-center text-3xl font-bold">Авторизация</h1>
@@ -62,9 +71,6 @@ const LoginPage: React.FC = () => {
             <MyButton onClick={onClickRedirect} children="На главную" />
           </div>
         </div>
-      </div>
-      <div className="flex-[0_0_auto] w-full">
-        <Footer />
       </div>
     </div>
   );

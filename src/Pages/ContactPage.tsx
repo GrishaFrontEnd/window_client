@@ -1,5 +1,5 @@
 import React from "react";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 const ContactPage: React.FC = () => {
   const leftAside: string[] = [
@@ -49,6 +49,7 @@ const ContactPage: React.FC = () => {
           height="450"
           loading="lazy"
           className="w-full"
+          title="Склад на карте"
         />
       </div>
     </div>

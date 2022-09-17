@@ -42,7 +42,7 @@ const ItemSlice = createSlice({
       state.items.push(action.payload);
     },
     removeItem(state, action) {
-      state.items.filter((item) => item.id != action.payload);
+      state.items.filter((item) => item.id !== action.payload);
     },
     setCurrentPage(state, action) {
       state.currentPage = action.payload;
