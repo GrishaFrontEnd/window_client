@@ -25,6 +25,7 @@ export const AuthApi = createApi({
         (getState() as RootState).auth.token ||
         window.localStorage.getItem("token");
       if (token) headers.set("authorization", `Bearer ${token}`);
+      if (!token) headers.set("authorization", "");
       return headers;
     },
   }),
