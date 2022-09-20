@@ -27,11 +27,13 @@ const MainLayout: React.FC = () => {
     return <h1>Идёт загрузка данных</h1>;
   }
   return (
-    <div className="min-w-full flex items-center flex-col min-h-screen mx-auto">
-      <div className="flex min-w-fit items-center flex-col flex-[1_0_auto]">
-        <Header />
+    <div className="max-w-screen-xl flex items-center flex-col min-h-screen mx-auto">
+      <div className="flex w-full items-center flex-col flex-[1_0_auto]">
+        <div className="min-w-full">
+          <Header />
+        </div>
         <div className="w-full">
-          <div>
+          <div className="max-w-full">
             <Categories />
             <div className="mt-5 min-w-full mx-auto">
               <Outlet />

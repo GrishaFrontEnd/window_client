@@ -5,10 +5,10 @@ import { MdAccessTime, MdCalendarToday } from "react-icons/md";
 
 const Header: React.FC = () => {
   return (
-    <div className="pt-3 flex flex-col items-start justify-center md:grid md:grid-cols-4 md:gap-4 w-full mx-auto">
+    <div className="pt-3 flex flex-col items-start sm:justify-center md:flex md:flex-row md:justify-between md:items-center min-w-full">
       <div className="my-3 md:my-0">
         <NavLink className="block" to="/">
-          <h1 className="font-bold text-2xl md:text-3xl lg:text-4xl">
+          <h1 className="font-bold sm:text-base xl:text-3xl md:text-2xl lg:text-xl">
             <span className="text-blue-700">Bu</span>
             <span className="italic">OKNA</span>
             <span className="text-blue-700">Yar</span>
@@ -16,12 +16,12 @@ const Header: React.FC = () => {
         </NavLink>
       </div>
       <div className="my-3 md:my-0">
-        <div className="text-xl font-bold">
+        <div className="sm:text-sm lg:text-sm md:text-lg xl:text-xl font-bold">
           <div>Продажа б\у окон и</div>
           <div> дверей в Ярославле</div>
         </div>
       </div>
-      <div className="text-xl font-medium my-3 md:my-0">
+      <div className="sm:text-sm lg:text-sm md:text-lg xl:text-xl font-medium my-3 md:my-0">
         <div>
           <div className="flex items-center">
             <MdCalendarToday className="mr-1" /> Без обеда и выходных
@@ -33,7 +33,7 @@ const Header: React.FC = () => {
           </div>
         </div>
       </div>
-      <div className="text-xl font-bold my-3 md:my-0">
+      <div className="sm:text-sm lg:text-sm md:text-lg xl:text-xl font-bold my-3 md:my-0">
         <div>
           {" "}
           <div className="flex items-center">
@@ -41,7 +41,7 @@ const Header: React.FC = () => {
             <div className="ml-2">+79959864777</div>
           </div>
         </div>
-        <div>
+        <div className="sm:text-sm lg:text-sm md:text-lg xl:text-xl">
           {" "}
           <a
             className="flex items-center"

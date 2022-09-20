@@ -3,10 +3,18 @@ import { Helmet } from "react-helmet-async";
 import { useParams } from "react-router-dom";
 import EqualsItems from "../Components/EqualsItems";
 import { useFetchItemByIdQuery } from "../Services/ItemService";
+import { HiOutlinePencil } from "react-icons/hi";
+import { useAppSelector } from "../Hooks/Redux";
 
 const ItemPage: React.FC = () => {
+  let formData = new FormData();
+  const [title, setTitle] = React.useState<string>("");
+  const handleClickTitle = (e: React.MouseEvent<HTMLDivElement>) => {};
+  const [price, setPrice] = React.useState<string>("");
+  const [count, setCount] = React.useState<string>("");
   let { id } = useParams();
   const { data: item, error, isLoading } = useFetchItemByIdQuery(+id);
+  const { isAdmin } = useAppSelector((state) => state.auth);
   if (isLoading) {
     return <h1>Идет загрузка...</h1>;
   }
@@ -25,9 +33,18 @@ const ItemPage: React.FC = () => {
       </Helmet>
       <div className="lg:grid max-h-fit lg:grid-cols-2 lg:gap-0 sm:grid-cols-1 sm:grid">
         <div className="mr-10 max-h-fit grid grid-rows-[1fr_1fr_6fr]">
-          <h1 className="font-semibold text-start text-4xl">
-            {item.item.title}
-          </h1>
+          <div className="flex items-center">
+            <h1 className="mr-4 font-semibold text-start text-4xl">
+              {item.item.title}
+            </h1>
+            <div className="text-3xl cursor-pointer">
+              {isAdmin && (
+                <div>
+                  <HiOutlinePencil />
+                </div>
+              )}
+            </div>
+          </div>
           <h2 className="my-2 text-2xl font-medium text-lime-700">
             Цена: {item.item.price} руб
           </h2>

@@ -27,7 +27,7 @@ const Item: React.FC<ServerItem> = ({ title, price, image, count, id }) => {
         )}
       </div>
       <div className="flex items-center font-medium">
-        Побробнее <FaArrowRight className="ml-2" />
+        Подробнее <FaArrowRight className="ml-2" />
       </div>
     </div>
   );

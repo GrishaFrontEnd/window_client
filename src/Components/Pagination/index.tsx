@@ -23,7 +23,11 @@ const Pagination: React.FC = () => {
       className="flex justify-center mt-4"
     >
       <ul className="cursor-pointer inline-flex items-center -space-x-px">
-        <li onClick={(e) => handleClickPagination(e, currentPage - 1)}>
+        <li
+          onClick={(e) =>
+            handleClickPagination(e, currentPage === 1 ? 1 : currentPage - 1)
+          }
+        >
           <div className="block py-2 px-3 ml-0 leading-tight text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
             <span className="sr-only">Previous</span>
             <svg

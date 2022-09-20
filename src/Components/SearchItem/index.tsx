@@ -37,7 +37,7 @@ const ButtonSearch: React.FC = () => {
         onClick={handleClickPopup}
         className="hover:bg-lime-300 text-lg min-w-max bg-lime-100 border border-lime-500 text-gray-900 rounded-l-lg py-2.5 px-3"
       >
-        {categories[0].value
+        {categories[0].value && category === categories[0].value
           ? categories[0].value.replace(/["']/g, "")
           : category}
       </button>

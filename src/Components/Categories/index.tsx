@@ -14,6 +14,10 @@ import {
   MdOutlinePaid,
 } from "react-icons/md";
 
+type PopupClick = MouseEvent & {
+  path: Node[];
+};
+
 const Categories: React.FC = () => {
   const isAdmin = useAppSelector((state) => state.auth.isAdmin);
   const { data: categories, error, isLoading } = useFetchAllCategoriesQuery();
@@ -45,14 +49,29 @@ const Categories: React.FC = () => {
   const handleClickBurger = (e: React.MouseEvent<HTMLSpanElement>) => {
     setIsOpenBurger(!isOpenBurger);
   };
+  const burgerRef = React.useRef<HTMLSpanElement>(null);
+  React.useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const _event = event as PopupClick;
+
+      if (burgerRef.current && !_event.path.includes(burgerRef.current)) {
+        setIsOpenBurger(false);
+      }
+    };
+
+    document.body.addEventListener("click", handleClickOutside);
+
+    return () => document.body.removeEventListener("click", handleClickOutside);
+  }, []);
   if (error) {
     return <h1>Произошла ошибка при загрузке данных</h1>;
   } else if (isLoading) {
     return <h1>Идет загрузка данных</h1>;
   }
   return (
-    <div className="min-w-full mx-auto text-xl p-1">
+    <div className="w-full min-w-min mx-auto sm:text-xs md:text-base lg:text-lg xl:text-xl p-1">
       <span
+        ref={burgerRef}
         onClick={handleClickBurger}
         className="text-3xl cursor-pointer mx-2 md:hidden block"
       >
@@ -73,7 +92,7 @@ const Categories: React.FC = () => {
             setIsOpenBurger(false)
           }
         >
-          <h2 className="cursor-pointer font-semibold hover:rounded-lg hover:text-white hover:bg-lime-400 p-3">
+          <div className="cursor-pointer font-semibold hover:rounded-lg hover:text-white hover:bg-lime-400 p-3">
             <NavLink to="/" className="flex items-center">
               {" "}
               <svg
@@ -90,9 +109,9 @@ const Categories: React.FC = () => {
                   d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
                 />
               </svg>
-              Каталог товаров
+              <h3 className="sm:text-xs">Каталог товаров</h3>
             </NavLink>
-          </h2>
+          </div>
           <ul
             className={
               dropdownCategory
