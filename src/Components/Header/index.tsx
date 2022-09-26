@@ -8,7 +8,7 @@ const Header: React.FC = () => {
     <div className="pt-3 flex flex-col items-start sm:justify-center md:flex md:flex-row md:justify-between md:items-center min-w-full">
       <div className="my-3 md:my-0">
         <NavLink className="block" to="/">
-          <h1 className="font-bold sm:text-base xl:text-3xl md:text-2xl lg:text-xl">
+          <h1 className="font-bold xl:text-3xl md:text-xl lg:text-2xl sm:text-lg">
             <span className="text-blue-700">Bu</span>
             <span className="italic">OKNA</span>
             <span className="text-blue-700">Yar</span>

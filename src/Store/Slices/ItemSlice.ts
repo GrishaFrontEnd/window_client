@@ -46,11 +46,6 @@ const ItemSlice = createSlice({
     },
     setCurrentPage(state, action) {
       state.currentPage = action.payload;
-      if (state.currentPage <= 0) {
-        state.currentPage = 1;
-      } else if (state.currentPage >= state.pageCount) {
-        state.currentPage = state.pageCount;
-      }
     },
     setPageCount(state, action) {
       state.pageCount = action.payload;

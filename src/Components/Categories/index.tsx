@@ -13,6 +13,8 @@ import {
   MdOutlineDeliveryDining,
   MdOutlinePaid,
 } from "react-icons/md";
+import { AiFillShopping } from "react-icons/ai";
+import { IoIosArrowDown } from "react-icons/io";
 
 type PopupClick = MouseEvent & {
   path: Node[];
@@ -53,14 +55,11 @@ const Categories: React.FC = () => {
   React.useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const _event = event as PopupClick;
-
       if (burgerRef.current && !_event.path.includes(burgerRef.current)) {
         setIsOpenBurger(false);
       }
     };
-
     document.body.addEventListener("click", handleClickOutside);
-
     return () => document.body.removeEventListener("click", handleClickOutside);
   }, []);
   if (error) {
@@ -89,28 +88,20 @@ const Categories: React.FC = () => {
           onMouseOver={handleMouseOverCategory}
           className="relative"
           onClick={(e: React.MouseEvent<HTMLLIElement>) =>
-            setIsOpenBurger(false)
+            setIsOpenBurger(!isOpenBurger)
           }
         >
           <div className="cursor-pointer font-semibold hover:rounded-lg hover:text-white hover:bg-lime-400 p-3">
-            <NavLink to="/" className="flex items-center">
+            <div className="flex items-center sm:text-xs lg:text-lg xl:text-xl">
               {" "}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-6 mr-1"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
-                />
-              </svg>
-              <h3 className="sm:text-xs">Каталог товаров</h3>
-            </NavLink>
+              <AiFillShopping />
+              <h3 className="sm:text-xs lg:text-lg xl:text-xl">
+                Каталог товаров
+              </h3>
+              <div>
+                <IoIosArrowDown />
+              </div>
+            </div>
           </div>
           <ul
             className={
@@ -122,10 +113,12 @@ const Categories: React.FC = () => {
             {categories?.map((item, index) => (
               <li
                 onClick={(e) => onClickCategory(e, item.id)}
-                className="rounded-lg cursor-pointer text-xl min-w-auto my-3 font-normal hover:text-white hover:bg-lime-400 p-3"
+                className="rounded-lg cursor-pointer text-xl min-w-auto my-3 font-normal hover:text-white hover:bg-lime-400 p-1 lg:p-3"
                 key={index}
               >
-                <NavLink to="/">{item.value.replace(/["']/g, "")}</NavLink>
+                <NavLink to="/" className="sm:text-xs lg:text-lg xl:text-xl">
+                  {item.value.replace(/["']/g, "")}
+                </NavLink>
               </li>
             ))}
           </ul>
@@ -133,15 +126,15 @@ const Categories: React.FC = () => {
         <li
           onMouseOut={handleMouseOutServices}
           onMouseOver={handleMouseOverServices}
-          className="relative"
+          className="relative sm:text-xs lg:text-lg xl:text-xl"
           onClick={(e: React.MouseEvent<HTMLLIElement>) =>
-            setIsOpenBurger(false)
+            setIsOpenBurger(!isOpenBurger)
           }
         >
           <CategoriesServices dropdownServices={dropdownServices} />
         </li>
         <li
-          className="my-2 font-semibold hover:rounded-lg hover:text-white hover:bg-lime-400 p-3"
+          className="my-2 sm:text-xs lg:text-lg xl:text-xl font-semibold hover:rounded-lg hover:text-white hover:bg-lime-400 p-3"
           onClick={(e: React.MouseEvent<HTMLLIElement>) =>
             setIsOpenBurger(false)
           }
@@ -151,18 +144,18 @@ const Categories: React.FC = () => {
           </NavLink>
         </li>
         <li
-          className="my-2 font-semibold hover:rounded-lg hover:text-white hover:bg-lime-400 p-3"
+          className="my-2 sm:text-xs lg:text-lg xl:text-xl font-semibold hover:rounded-lg hover:text-white hover:bg-lime-400 p-3"
           onClick={(e: React.MouseEvent<HTMLLIElement>) =>
             setIsOpenBurger(false)
           }
         >
           <NavLink to="/delivery" className="flex items-center">
-            <MdOutlineDeliveryDining className="mr-1 hover:text-white" />{" "}
+            <MdOutlineDeliveryDining className="mr-1 hover:text-white sm:text-xs lg:text-lg xl:text-xl" />{" "}
             Доставка
           </NavLink>
         </li>
         <li
-          className="font-semibold hover:rounded-lg hover:text-white hover:bg-lime-400 p-3"
+          className="font-semibold hover:rounded-lg sm:text-xs lg:text-lg xl:text-xl hover:text-white hover:bg-lime-400 p-3"
           onClick={(e: React.MouseEvent<HTMLLIElement>) =>
             setIsOpenBurger(false)
           }
@@ -173,12 +166,13 @@ const Categories: React.FC = () => {
               className="flex items-center p-3 hover:bg-lime-400 rounded-lg"
             >
               {" "}
-              <MdOutlineAdminPanelSettings className="mr-1" /> Панель
-              администратора
+              <MdOutlineAdminPanelSettings className="mr-1 sm:text-xs lg:text-lg xl:text-xl" />{" "}
+              Панель администратора
             </NavLink>
           ) : (
             <NavLink to="/login" className="flex items-center">
-              <MdOutlineImportContacts className="mr-1" /> Личный кабинет
+              <MdOutlineImportContacts className="mr-1 sm:text-xs lg:text-lg xl:text-xl" />{" "}
+              Личный кабинет
             </NavLink>
           )}
         </li>

@@ -4,7 +4,7 @@ import { ServerItem } from "../../Models/IItem";
 
 const Item: React.FC<ServerItem> = ({ title, price, image, count, id }) => {
   return (
-    <div className="grid mr-5 bg-lime-100 border min-h-full border-lime-500 hover:bg-lime-200 p-2">
+    <div className="grid mr-5 bg-lime-100 max-w-full border min-h-full border-lime-500 hover:bg-lime-200 p-2">
       <div className="flex font-semibold text-lg flex-col">
         <h1 className="mb-2">{title}</h1>
       </div>

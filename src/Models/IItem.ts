@@ -32,6 +32,20 @@ export interface IServerProperties {
   item_id: number;
 }
 
+export interface ISetItemImage {
+  formData: FormData;
+  id: number;
+}
+
+export interface ISetItemData {
+  id: number;
+  price: number;
+  title: string;
+  properties?: IServerProperties[];
+  count: number;
+  category_id: number;
+}
+
 export interface ServerItem {
   id: number;
   price: number;

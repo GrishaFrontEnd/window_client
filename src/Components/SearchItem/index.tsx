@@ -5,6 +5,10 @@ import debounce from "lodash.debounce";
 import { useFetchAllCategoriesQuery } from "../../Services/CategoriesApi";
 import { setActiveCategories } from "../../Store/Slices/CategoriesSlice";
 
+type PopupClick = MouseEvent & {
+  path: Node[];
+};
+
 const ButtonSearch: React.FC = () => {
   const dispatch = useAppDispatch();
   const [visiblePopup, setVisiblePopup] = React.useState<boolean>(false);
@@ -13,7 +17,7 @@ const ButtonSearch: React.FC = () => {
     setVisiblePopup(!visiblePopup);
   };
   const { data: categories, error, isLoading } = useFetchAllCategoriesQuery();
-  const [category, setCategory] = React.useState<string>("");
+  const [category, setCategory] = React.useState<string>("Все товары");
   const handleCategoryClick = (
     e: React.MouseEvent<HTMLLIElement>,
     str: string
@@ -26,6 +30,17 @@ const ButtonSearch: React.FC = () => {
     );
     setVisiblePopup(false);
   };
+  const btnRef = React.useRef<HTMLButtonElement>(null);
+  React.useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const _event = event as PopupClick;
+      if (btnRef.current && !_event.path.includes(btnRef.current)) {
+        setVisiblePopup(false);
+      }
+    };
+    document.body.addEventListener("click", handleClickOutside);
+    return () => document.body.removeEventListener("click", handleClickOutside);
+  }, []);
   if (isLoading) {
     return <h1>Загрузка</h1>;
   } else if (error) {
@@ -35,11 +50,13 @@ const ButtonSearch: React.FC = () => {
     <div>
       <button
         onClick={handleClickPopup}
+        ref={btnRef}
         className="hover:bg-lime-300 text-lg min-w-max bg-lime-100 border border-lime-500 text-gray-900 rounded-l-lg py-2.5 px-3"
       >
-        {categories[0].value && category === categories[0].value
-          ? categories[0].value.replace(/["']/g, "")
-          : category}
+        {categories[0].value &&
+        categories[0].value.replace(/["']/g, "") !== category
+          ? category
+          : categories[0].value.replace(/["']/g, "")}
       </button>
       <div
         className={

@@ -8,7 +8,7 @@ import Pagination from "../Pagination";
 
 const List: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { searchString, currentPage } = useAppSelector(
+  const { searchString, currentPage, pageCount } = useAppSelector(
     (state) => state.itemReducer
   );
   const { activeCategory } = useAppSelector((state) => state.categories);
@@ -21,18 +21,9 @@ const List: React.FC = () => {
     isLoading,
   } = useFetchAllItemsQuery(resultSearchString);
 
-  const itemsMap = response?.rows
-    ? response.rows.map((item, index) => {
-        return (
-          <NavLink className="mb-4" key={index} to={`/item/${item.id}`}>
-            <Item {...item} />
-          </NavLink>
-        );
-      })
-    : undefined;
   React.useEffect(() => {
     dispatch(setItems(response?.rows));
-    dispatch(setPageCount(Math.ceil(response?.rows.length / 20)));
+    dispatch(setPageCount(Math.ceil(response?.count / 20)));
   }, [response?.rows]);
   if (error) {
     return <h1>Ошибка</h1>;
@@ -44,11 +35,23 @@ const List: React.FC = () => {
       {error && <h1>Ошибка...</h1>}
       {isLoading && <h1>Идет загрузка</h1>}
       <div className="mx-auto">
-        {
-          <div className="mx-auto ml-4 sm:grid-cols-2 md:grid-cols-3 grid lg:grid-cols-4 xl:grid-cols-4 lg:gap-4 sm:grid-gap-2 2xl:grid-cols-5 grid-rows-10 max-w-fit">
-            {itemsMap}
+        {response && (
+          <div className="mx-auto ml-4 grid-cols-2 md:grid-cols-3 grid lg:grid-cols-4 xl:grid-cols-4 lg:gap-4 sm:grid-gap-2 2xl:grid-cols-5 grid-rows-10 max-w-fit">
+            {response?.count
+              ? response?.rows.map((item, index) => {
+                  return (
+                    <NavLink
+                      className="mb-4 block"
+                      key={index}
+                      to={`/item/${item.id}`}
+                    >
+                      <Item {...item} />
+                    </NavLink>
+                  );
+                })
+              : undefined}
           </div>
-        }
+        )}
       </div>
       <Pagination />
     </div>

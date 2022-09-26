@@ -46,14 +46,19 @@ export const ItemAPI = createApi({
       }),
       invalidatesTags: [{ type: "Items", id: "1" }],
     }),
-    updateItem: build.mutation<
-      ServerItem,
-      Partial<ServerItem> & Pick<ServerItem, "id">
-    >({
-      query: ({ id, ...patch }) => ({
-        url: `/${id}`,
+    setItemImage: build.mutation<ServerItem, FormData>({
+      query: (formData) => ({
+        url: ``,
         method: "PATCH",
-        body: patch,
+        body: formData,
+      }),
+      invalidatesTags: [{ type: "Items", id: "1" }],
+    }),
+    updateDataItem: build.mutation<ServerItem, FormData>({
+      query: (formData) => ({
+        url: ``,
+        method: "PATCH",
+        body: formData,
       }),
       invalidatesTags: [{ type: "Items", id: "list" }],
     }),
@@ -72,6 +77,7 @@ export const {
   useFetchItemByIdQuery,
   useFetchAllItemsByCategoriesQuery,
   useCreateItemMutation,
-  useUpdateItemMutation,
   useDeleteItemMutation,
+  useSetItemImageMutation,
+  useUpdateDataItemMutation,
 } = ItemAPI;

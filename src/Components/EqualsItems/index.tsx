@@ -40,7 +40,7 @@ const EqualsItems: React.FC<IEqualItemsProps> = ({ category }) => {
               >
                 <FaLongArrowAltLeft />
               </div>
-              <div className="grid grid-cols-6 gap-4">
+              <div className="grid sm:grid-cols-3 xl:grid-cols-6 gap-2">
                 {serverResponse.rows.map((item, index) => (
                   <NavLink key={index} to={`/item/${item.id}`}>
                     <div
