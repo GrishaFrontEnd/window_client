@@ -1,5 +1,14 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
-import { IServerItem, ServerItem, ServerResponse } from "../Models/IItem";
+import {
+  IServerItem,
+  ISetItemImage,
+  IUpdateCount,
+  IUpdatePrice,
+  IUpdateProperties,
+  IUpdateTitle,
+  ServerItem,
+  ServerResponse,
+} from "../Models/IItem";
 import { RootState } from "../Store/Store";
 
 export const ItemAPI = createApi({
@@ -47,20 +56,44 @@ export const ItemAPI = createApi({
       invalidatesTags: [{ type: "Items", id: "1" }],
     }),
     setItemImage: build.mutation<ServerItem, FormData>({
-      query: (formData) => ({
-        url: ``,
+      query: (dto) => ({
+        url: `/image`,
         method: "PATCH",
-        body: formData,
+        body: dto,
       }),
       invalidatesTags: [{ type: "Items", id: "1" }],
     }),
-    updateDataItem: build.mutation<ServerItem, FormData>({
-      query: (formData) => ({
-        url: ``,
+    updateTitle: build.mutation<ServerItem, IUpdateTitle>({
+      query: (dto) => ({
+        url: `/title`,
         method: "PATCH",
-        body: formData,
+        body: dto,
       }),
-      invalidatesTags: [{ type: "Items", id: "list" }],
+      invalidatesTags: [{ type: "Items", id: "1" }],
+    }),
+    updateCount: build.mutation<ServerItem, IUpdateCount>({
+      query: (dto) => ({
+        url: `/count`,
+        method: "PATCH",
+        body: dto,
+      }),
+      invalidatesTags: [{ type: "Items", id: "1" }],
+    }),
+    updatePrice: build.mutation<ServerItem, IUpdatePrice>({
+      query: (dto) => ({
+        url: `/price`,
+        method: "PATCH",
+        body: dto,
+      }),
+      invalidatesTags: [{ type: "Items", id: "1" }],
+    }),
+    updateProperties: build.mutation<ServerItem, IUpdateProperties>({
+      query: (dto) => ({
+        url: `/properties`,
+        method: "PATCH",
+        body: dto,
+      }),
+      invalidatesTags: [{ type: "Items", id: "1" }],
     }),
     deleteItem: build.mutation<number, Number>({
       query: (id) => ({
@@ -79,5 +112,6 @@ export const {
   useCreateItemMutation,
   useDeleteItemMutation,
   useSetItemImageMutation,
-  useUpdateDataItemMutation,
+  useUpdateCountMutation,
+  useUpdatePriceMutation,
 } = ItemAPI;

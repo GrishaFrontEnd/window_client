@@ -97,7 +97,7 @@ const SearchItem: React.FC = () => {
     updateSearchValue(e.target.value);
   };
   return (
-    <div className="flex items-baseline min-w-max mr-5">
+    <div className="flex items-baseline max-w-full min-w-max mr-5">
       <ButtonSearch />
       <div className="relative w-full">
         <input

@@ -41,7 +41,7 @@ const HomePage: React.FC = () => {
           <SearchItem />
         </div>
         {
-          <h3 className="text-center font-medium text-3xl mt-5">
+          <h3 className="text-center max-w-full font-medium text-3xl mt-5">
             {category.value.replace(/["']/g, "") === "Все товары"
               ? "Все товары"
               : `Все товары в категории  ${category.value.replace(

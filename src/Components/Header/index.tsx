@@ -5,7 +5,7 @@ import { MdAccessTime, MdCalendarToday } from "react-icons/md";
 
 const Header: React.FC = () => {
   return (
-    <div className="pt-3 flex flex-col items-start sm:justify-center md:flex md:flex-row md:justify-between md:items-center min-w-full">
+    <div className="pt-3 p-3 flex flex-col items-start sm:justify-center md:flex md:flex-row md:justify-between md:items-center min-w-full">
       <div className="my-3 md:my-0">
         <NavLink className="block" to="/">
           <h1 className="font-bold xl:text-3xl md:text-xl lg:text-2xl sm:text-lg">

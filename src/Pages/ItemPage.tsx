@@ -5,13 +5,13 @@ import EqualsItems from "../Components/EqualsItems";
 import {
   useFetchItemByIdQuery,
   useSetItemImageMutation,
-  useUpdateDataItemMutation,
+  useUpdateCountMutation,
+  useUpdatePriceMutation,
 } from "../Services/ItemService";
 import { HiOutlinePencil } from "react-icons/hi";
 import { useAppSelector } from "../Hooks/Redux";
 import MyFileInput from "../UI/MyFileInput";
 import MyButton from "../UI/MyButton";
-import MyInput from "../UI/MyInput";
 import { FiPlus, FiMinus } from "react-icons/fi";
 
 const ItemPage: React.FC = () => {
@@ -22,74 +22,80 @@ const ItemPage: React.FC = () => {
   const { isAdmin } = useAppSelector((state) => state.auth);
   const { categories } = useAppSelector((state) => state.categories);
 
-  let formData = new FormData();
-
-  const [updateData] = useUpdateDataItemMutation();
-  const [setImage] = useSetItemImageMutation();
+  const formData = new FormData();
 
   //Обновление изображения
 
-  const [isVisibleImageBtn, setIsVisibleImageBtn] =
-    React.useState<boolean>(false);
+  const [setImage] = useSetItemImageMutation();
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let file = e.target.files[0];
     formData.append("image", file);
-    setIsVisibleImageBtn(true);
   };
   const handleSetImage = async (e: React.MouseEvent<HTMLButtonElement>) => {
     try {
-      formData.append("id", id);
+      formData.append("id", String(item.item.id));
       await setImage(formData).unwrap();
-      setIsVisibleImageBtn(false);
       refetch();
-      formData.delete("image");
     } catch (err) {}
   };
 
   // Изменение названия
 
-  const [title, setTitle] = React.useState<string>("");
-  const [isVisibleTitle, setIsVisibleTitle] = React.useState<boolean>(false);
-  const handleClickTitle = (e: React.MouseEvent<HTMLDivElement>) => {};
-  const handleChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTitle(e.currentTarget.title);
-    setIsVisibleTitle(true);
-  };
-  const handleSetTitle = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    try {
-      formData.append("title", title);
-    } catch (err) {}
-  };
+  // const [title, setTitle] = React.useState<string>("");
+  // const [isVisibleTitle, setIsVisibleTitle] = React.useState<boolean>(false);
+  // const handleClickTitle = (e: React.MouseEvent<HTMLDivElement>) => {};
+  // const handleChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setTitle(e.currentTarget.title);
+  //   setIsVisibleTitle(true);
+  // };
+  // const handleSetTitle = async (e: React.MouseEvent<HTMLButtonElement>) => {
+  //   try {
+  //     formData.append("title", title);
+  //   } catch (err) {}
+  // };
 
   // Изменение цены
 
-  const [price, setPrice] = React.useState<string>("");
-  const [isSetPrice, setIsSetPrice] = React.useState<boolean>(false);
-  const handleClickPrice = (e: React.MouseEvent<HTMLDivElement>) => {
-    setIsSetPrice(!isSetPrice);
-  };
-  const handleSetPrice = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPrice(e.target.value);
-  };
-  const handleUpdatePrice = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    formData.append("title", item.item.title);
-    formData.append("count", String(item.item.count));
-    formData.append("price", `${price} руб.`);
-    formData.append("category_id", String(item.item.category_id));
-    // formData.append("properties", item._properties);
-    try {
-      await updateData(formData).unwrap();
-      refetch();
-    } catch (e) {}
-  };
+  // const [updatePrice] = useUpdatePriceMutation();
+  // const [price, setPrice] = React.useState<string>("");
+  // const [isSetPrice, setIsSetPrice] = React.useState<boolean>(true);
+  // const handleClickPrice = (e: React.MouseEvent<HTMLDivElement>) => {
+  //   setIsSetPrice(isSetPrice);
+  // };
+  // console.log(isSetPrice);
+  // const handleSetPrice = React.useCallback(
+  //   (e: React.ChangeEvent<HTMLInputElement>) => {
+  //     setIsSetPrice(true);
+  //     setPrice(e.target.value);
+  //   },
+  //   [price, isSetPrice]
+  // );
+  // const handleFocusPrice = React.useCallback(
+  //   (e: React.FocusEvent<HTMLInputElement>) => {
+  //     setIsSetPrice(true);
+  //   },
+  //   [isSetPrice]
+  // );
+  // const handleUpdatePrice = async (e: React.MouseEvent<HTMLButtonElement>) => {
+  //   try {
+  //     await updatePrice({ id: item.item.id, price: Number(price) });
+  //     refetch();
+  //   } catch (e) {}
+  // };
 
   // Изменение количества
 
-  const [count, setCount] = React.useState<number>(0);
+  const [updateCount] = useUpdateCountMutation();
   const handleChangeCount = async (
     e: React.MouseEvent<HTMLSpanElement>,
     num: number
-  ) => {};
+  ) => {
+    try {
+      console.log(id, num);
+      await updateCount({ id: item.item.id, count: num }).unwrap();
+      refetch();
+    } catch (err) {}
+  };
 
   // Изменение категории
 
@@ -118,32 +124,15 @@ const ItemPage: React.FC = () => {
               {item.item.title}
             </h1>
             <div className="text-3xl cursor-pointer">
-              {isAdmin && (
+              {/* {isAdmin && (
                 <div>
                   <HiOutlinePencil />
                 </div>
-              )}
+              )} */}
             </div>
           </div>
-          <div
-            className="my-2 text-2xl font-medium text-lime-700 flex items-center"
-            onClick={handleClickPrice}
-          >
-            {isSetPrice ? (
-              <MyInput
-                placeholder={String(item.item.price)}
-                onChange={handleSetPrice}
-              />
-            ) : (
-              <div>Цена: {item.item.price} руб</div>
-            )}
-            <div className="text-3xl cursor-pointer">
-              {isAdmin && (
-                <div>
-                  <HiOutlinePencil />
-                </div>
-              )}
-            </div>
+          <div className="my-2 text-2xl font-medium text-lime-700 flex items-center">
+            <div>Цена: {item.item.price} руб</div>
           </div>
           <div>
             <div className="overflow-hidden h-96">
@@ -153,18 +142,16 @@ const ItemPage: React.FC = () => {
                 alt="Изображение товара"
               />
             </div>
-            <div>
+            {/* <div>
               {isAdmin && (
                 <div className="w-full mx-auto">
                   <MyFileInput onChange={handleFileChange} />
                 </div>
               )}
-              {isVisibleImageBtn && (
-                <div>
-                  <MyButton children="Обновить фото" onClick={handleSetImage} />
-                </div>
-              )}
-            </div>
+              <div>
+                <MyButton children="Обновить фото" onClick={handleSetImage} />
+              </div>
+            </div> */}
           </div>
         </div>
         <div className="max-h-fit">
@@ -185,10 +172,18 @@ const ItemPage: React.FC = () => {
                   {item.item.count} шт{" "}
                   {isAdmin && (
                     <span className="inline">
-                      <span onClick={}>
+                      <span
+                        onClick={(e) =>
+                          handleChangeCount(e, item.item.count + 1)
+                        }
+                      >
                         <FiPlus className="inline cursor-pointer hover:text-black" />
                       </span>{" "}
-                      <span onClick={}>
+                      <span
+                        onClick={(e) =>
+                          handleChangeCount(e, item.item.count - 1)
+                        }
+                      >
                         <FiMinus className="inline cursor-pointer hover:text-black" />
                       </span>
                     </span>

@@ -17,7 +17,7 @@ import PrivateOutlet from "./Utils/PrivateOutlet";
 
 const App: React.FC = () => {
   return (
-    <div>
+    <div className="max-w-full p-2">
       <div>
         <Routes>
           <Route path="/" element={<MainLayout />}>
