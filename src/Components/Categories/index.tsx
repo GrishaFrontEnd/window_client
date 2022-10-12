@@ -15,6 +15,8 @@ import {
 } from "react-icons/md";
 import { AiFillShopping } from "react-icons/ai";
 import { IoIosArrowDown } from "react-icons/io";
+import ErrorPage from "../Error";
+import Downloader from "../Downloader";
 
 type PopupClick = MouseEvent & {
   path: Node[];
@@ -33,10 +35,10 @@ const Categories: React.FC = () => {
   };
   const [dropdownCategory, setDropdownCategory] =
     React.useState<boolean>(false);
-  const handleMouseOverCategory = (e: React.MouseEvent<HTMLLIElement>) => {
+  const handleMouseOverCategory = (e: React.MouseEvent<HTMLHeadingElement>) => {
     setDropdownCategory(true);
   };
-  const handleMouseOutCategory = (e: React.MouseEvent<HTMLLIElement>) => {
+  const handleMouseOutCategory = (e: React.MouseEvent<HTMLHeadingElement>) => {
     setDropdownCategory(false);
   };
   const [dropdownServices, setDropdownServices] =
@@ -46,6 +48,9 @@ const Categories: React.FC = () => {
   };
   const handleMouseOutServices = (e: React.MouseEvent<HTMLLIElement>) => {
     setDropdownServices(false);
+  };
+  const handleMobileClick = (e: React.MouseEvent<HTMLLIElement>) => {
+    setIsOpenBurger(true);
   };
   const [isOpenBurger, setIsOpenBurger] = React.useState<boolean>(false);
   const handleClickBurger = (e: React.MouseEvent<HTMLSpanElement>) => {
@@ -63,9 +68,9 @@ const Categories: React.FC = () => {
     return () => document.body.removeEventListener("click", handleClickOutside);
   }, []);
   if (error) {
-    return <h1>Произошла ошибка при загрузке данных</h1>;
+    return <ErrorPage />;
   } else if (isLoading) {
-    return <h1>Идет загрузка данных</h1>;
+    return <Downloader />;
   }
   return (
     <div className="w-full min-w-min mx-auto sm:text-xs md:text-base lg:text-lg xl:text-xl p-1">
@@ -83,19 +88,16 @@ const Categories: React.FC = () => {
             : "md:flex z-[-1] md:z-auto md:static absolute bg-white w-full left-0 md:w-auto md:py-0 py-4 md:pl-0 pl-7 md:opacity-100 opacity-0 top-[-400px]  transition-all ease-in duration-500 max-w-7xl md:mx-auto md:text-2xl md:justify-between md:items-baseline px-4"
         }
       >
-        <li
-          onMouseOut={handleMouseOutCategory}
-          onMouseOver={handleMouseOverCategory}
-          className="relative"
-          onClick={(e: React.MouseEvent<HTMLLIElement>) =>
-            setIsOpenBurger(!isOpenBurger)
-          }
-        >
+        <li className="relative">
           <div className="cursor-pointer font-semibold hover:rounded-lg hover:text-white hover:bg-lime-400 p-3">
             <div className="flex items-center sm:text-xs lg:text-lg xl:text-xl">
               {" "}
               <AiFillShopping />
-              <h3 className="sm:text-xs lg:text-lg xl:text-xl">
+              <h3
+                onMouseOut={handleMouseOutCategory}
+                onMouseOver={handleMouseOverCategory}
+                className="sm:text-xs lg:text-lg xl:text-xl"
+              >
                 Каталог товаров
               </h3>
               <div>
@@ -103,6 +105,21 @@ const Categories: React.FC = () => {
               </div>
             </div>
           </div>
+          {isOpenBurger && (
+            <ul>
+              {categories?.map((item, index) => (
+                <li
+                  onClick={(e) => onClickCategory(e, item.id)}
+                  className="rounded-lg cursor-pointer text-xl min-w-auto my-3 font-normal hover:text-white hover:bg-lime-400 p-1 lg:p-3"
+                  key={index}
+                >
+                  <NavLink to="/" className="sm:text-xs lg:text-lg xl:text-xl">
+                    {item.value.replace(/["']/g, "")}
+                  </NavLink>
+                </li>
+              ))}
+            </ul>
+          )}
           <ul
             className={
               dropdownCategory

@@ -27,7 +27,7 @@ const AdminDeleteCategory: React.FC = () => {
   if (error) {
     return <h1>Ошибка</h1>;
   } else if (isLoading) {
-    return <h1>Идет загрузка</h1>;
+    return <h1>ет загрузка</h1>;
   }
   return (
     <div className="mt-4 min-w-full">

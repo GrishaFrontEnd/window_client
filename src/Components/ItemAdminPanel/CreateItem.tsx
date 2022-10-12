@@ -16,7 +16,7 @@ const CreateItem: React.FC = () => {
   const { data: categories } = useFetchAllCategoriesQuery();
   const dispatch = useAppDispatch();
   const formData = new FormData();
-  const [createItem, resultCreateItem] = useCreateItemMutation();
+  const [createItem] = useCreateItemMutation();
   const [categoryNum, setCategoryNum] = React.useState<number>(1);
   const [properties, setProperties] = React.useState<IProperties[]>([
     { id: randomNumber(), property: "", value: "" },
@@ -25,19 +25,10 @@ const CreateItem: React.FC = () => {
     data: categoryProperties,
     error,
     isLoading,
+    refetch,
   } = useFetchPropertiesByCategoryQuery(categoryNum);
-  const handleChangeCategory = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setCategoryNum(+e.target.value);
-    if (+e.target.value !== 1) {
-      let arr: IProperties[] = [];
-      categoryProperties.map((property) =>
-        arr.push({ property: property.title, value: "", id: randomNumber() })
-      );
-      setProperties(arr);
-    }
-  };
   React.useEffect(() => {
-    setCategoryNum(categoryNum);
+    refetch();
     if (categoryNum !== 1) {
       let arr: IProperties[] = [];
       categoryProperties.map((property) =>
@@ -46,6 +37,29 @@ const CreateItem: React.FC = () => {
       setProperties(arr);
     }
   }, [categoryNum]);
+  React.useLayoutEffect(() => {
+    refetch();
+    if (categoryNum !== 1) {
+      let arr: IProperties[] = [];
+      categoryProperties.map((property) =>
+        arr.push({ property: property.title, value: "", id: randomNumber() })
+      );
+      setProperties(arr);
+    }
+  }, [categoryNum]);
+  const handleChangeCategory = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setCategoryNum(+e.target.value);
+    refetch();
+    console.log(categoryNum, +e.target.value, categoryProperties);
+    if (+e.target.value !== 1) {
+      let arr: IProperties[] = [];
+      categoryProperties.map((property) =>
+        arr.push({ property: property.title, value: "", id: randomNumber() })
+      );
+      setProperties(arr);
+    }
+    console.log(categoryNum, +e.target.value, categoryProperties);
+  };
   const [title, setTitle] = React.useState<string>("");
   const handleChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
@@ -136,7 +150,6 @@ const CreateItem: React.FC = () => {
   return (
     <div className="mt-4 min-w-full">
       <h2 className="font-bold mb-4 text-xl">Создание товара</h2>
-      <DropdownCategory onChange={handleChangeCategory} value={categoryNum} />
       <MyInput
         value={title}
         onChange={handleChangeTitle}
@@ -152,6 +165,7 @@ const CreateItem: React.FC = () => {
         onChange={handleChangeCount}
         placeholder="Введите количество товара"
       />
+      <DropdownCategory onChange={handleChangeCategory} value={categoryNum} />
       {properties.map((property, index) => (
         <div className="flex gap-5 mt-5" key={index}>
           <DropdownProperties

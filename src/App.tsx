@@ -20,9 +20,9 @@ const App: React.FC = () => {
     <div className="max-w-full p-2">
       <div>
         <Routes>
+          <Route path="/login" element={<LoginPage />} />
           <Route path="/" element={<MainLayout />}>
             <Route index element={<HomePage />} />
-            <Route path="/login" element={<LoginPage />} />
             <Route path="item/:id" element={<ItemPage />} />
             <Route path="service/:id" element={<ServicePage />} />
             <Route path="contacts" element={<ContactPage />} />

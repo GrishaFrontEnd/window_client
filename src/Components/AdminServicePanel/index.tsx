@@ -2,6 +2,8 @@ import React from "react";
 import { useAppDispatch, useAppSelector } from "../../Hooks/Redux";
 import { useFetchAllServicesQuery } from "../../Services/ServiceApi";
 import { setServices } from "../../Store/Slices/ServiceSlice";
+import Downloader from "../Downloader";
+import ErrorPage from "../Error";
 import CreateService from "./CreateService";
 import DeleteService from "./DeleteService";
 import UpdateService from "./UpdateService";
@@ -14,9 +16,9 @@ const AdminServicePanel: React.FC = () => {
   }, [_services]);
   const { services } = useAppSelector((state) => state.service);
   if (error) {
-    return <h1>Произошла ошибка при загрузке данных</h1>;
+    return <ErrorPage />;
   } else if (isLoading) {
-    return <h1>Идёт загрузка данных</h1>;
+    return <Downloader />;
   }
   return (
     <div className="flex-column min-w-full">

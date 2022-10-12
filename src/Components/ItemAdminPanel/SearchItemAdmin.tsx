@@ -1,6 +1,8 @@
 import React from "react";
 import { useFetchAllItemsQuery } from "../../Services/ItemService";
 import MyInput from "../../UI/MyInput";
+import Downloader from "../Downloader";
+import ErrorPage from "../Error";
 
 interface ISearchItemAdmin {
   searchString: string;
@@ -22,8 +24,8 @@ const SearchItemAdmin: React.FC<ISearchItemAdmin> = ({
   } = useFetchAllItemsQuery(`?title=${searchString}&limit=10&page=1`);
   return (
     <div>
-      {error && <h1>Произошла ошбка...</h1>}
-      {isLoading && <h1>Идет загрузка...</h1>}
+      {error && <ErrorPage />}
+      {isLoading && <Downloader />}
       {items && (
         <section className="relative w-full">
           <MyInput

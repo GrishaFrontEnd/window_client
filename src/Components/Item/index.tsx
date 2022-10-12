@@ -6,11 +6,11 @@ const Item: React.FC<ServerItem> = ({ title, price, image, count, id }) => {
   return (
     <div className="grid mr-5 bg-lime-100 max-w-full border min-h-full border-lime-500 hover:bg-lime-200 p-2">
       <div className="flex font-semibold text-lg flex-col">
-        <h1 className="mb-2">{title}</h1>
+        <h1 className="mb-2 max-w-full">{title}</h1>
       </div>
-      <div className="overflow-hidden h-44">
+      <div className="overflow-hidden relative pt-0 pr-0 pb-[58%] pl-0">
         <img
-          className="w-full h-full object-cover object-center"
+          className="max-w-full w-full h-full object-cover absolute top-0 left-0"
           src={process.env.REACT_APP_API + "/" + image}
           alt=""
         />

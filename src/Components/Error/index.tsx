@@ -1,11 +1,13 @@
 import React from "react";
 
-const Error: React.FC = () => {
+const ErrorPage: React.FC = () => {
   return (
     <section>
-      <div></div>
+      <div className="text-xl font-bold text-center">
+        Произошла ошибка при загрузке данных
+      </div>
     </section>
   );
 };
 
-export default Error;
+export default ErrorPage;

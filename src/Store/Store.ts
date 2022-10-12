@@ -10,6 +10,7 @@ import categoryReducer from "./Slices/CategoriesSlice";
 import serviceReducer from "./Slices/ServiceSlice";
 import { PropertiesApi } from "../Services/PropertiesApi";
 import { setupListeners } from "@reduxjs/toolkit/dist/query";
+import createItemReducer from "./Slices/CreateItemSlice";
 
 const rootReducer = combineReducers({
   itemReducer,
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   categories: categoryReducer,
   service: serviceReducer,
   [PropertiesApi.reducerPath]: PropertiesApi.reducer,
+  createItem: createItemReducer,
 });
 
 export const setupStore = () => {

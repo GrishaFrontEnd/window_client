@@ -11,6 +11,8 @@ import { useFetchAllCategoriesQuery } from "../../Services/CategoriesApi";
 import { useFetchAllServicesQuery } from "../../Services/ServiceApi";
 import { setActiveCategories } from "../../Store/Slices/CategoriesSlice";
 import { FaPhone, FaWhatsapp } from "react-icons/fa";
+import ErrorPage from "../Error";
+import Downloader from "../Downloader";
 
 const FooterCategories: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -23,8 +25,8 @@ const FooterCategories: React.FC = () => {
   };
   return (
     <div>
-      {error && <h1>Произошла ошибка при загрузке данных</h1>}
-      {isLoading && <h1>Идёт загрузка...</h1>}
+      {error && <ErrorPage />}
+      {isLoading && <Downloader />}
       {categories && (
         <div>
           <h3 className="ml-4 flex items-center">
@@ -69,8 +71,8 @@ const FooterServices: React.FC = () => {
   const { data: services, error, isLoading } = useFetchAllServicesQuery();
   return (
     <div>
-      {error && <h1>Произошла ошибка при загрузке данных</h1>}
-      {isLoading && <h1>Идёт загрузка...</h1>}
+      {error && <ErrorPage />}
+      {isLoading && <Downloader />}
       {services && (
         <div>
           <h3 className="ml-4 flex items-center">
@@ -144,7 +146,7 @@ const FooterData: React.FC = () => {
 const Footer: React.FC = () => {
   return (
     <section className="bg-lime-100 mt-5">
-      <div className="max-w-screen-xl mx-auto py-4 grid md:grid-cols-4 gap-4 text-black font-medium text-xl">
+      <div className="max-w-screen-xl mx-auto py-4 flex items-start justify-between gap-4 text-black font-medium text-xl">
         <FooterCategories />
         <FooterServices />
         <FooterNavbar />

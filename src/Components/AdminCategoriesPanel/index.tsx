@@ -1,5 +1,7 @@
 import React from "react";
 import { useFetchAllCategoriesQuery } from "../../Services/CategoriesApi";
+import Downloader from "../Downloader";
+import ErrorPage from "../Error";
 import AdminCreateCategory from "./CreateCategory";
 import AdminDeleteCategory from "./DeleteCategory";
 import AdminUpdateCategory from "./UpdateCategory";
@@ -7,9 +9,9 @@ import AdminUpdateCategory from "./UpdateCategory";
 const AdminCategoriesPanel: React.FC = () => {
   const { data: categories, error, isLoading } = useFetchAllCategoriesQuery();
   if (error) {
-    return <h1>Произошла ошибка при загрузке данных</h1>;
+    return <ErrorPage />;
   } else if (isLoading) {
-    return <h1>Идёт загрузка данных</h1>;
+    return <Downloader />;
   }
   return (
     <div className="flex-column min-w-full">

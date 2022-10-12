@@ -1,5 +1,7 @@
 import React from "react";
 import { Helmet } from "react-helmet-async";
+import Downloader from "../Components/Downloader";
+import ErrorPage from "../Components/Error";
 import List from "../Components/List";
 import SearchItem from "../Components/SearchItem";
 import { useAppDispatch, useAppSelector } from "../Hooks/Redux";
@@ -22,14 +24,14 @@ const HomePage: React.FC = () => {
     isLoading,
   } = useFetchCategoryByIdQuery(activeCategory);
   if (isLoading) {
-    return <h1>...Идет загрузка</h1>;
+    return <Downloader />;
   } else if (error) {
-    return <h1>Произошла ошибка при загрузке данных</h1>;
+    return <ErrorPage />;
   }
   return (
     <div className="flex flex-col min-w-max sm:w-full">
       <Helmet>
-        <title>booknoyar</title>
+        <title>buoknoyar</title>
         <meta name="description" content="Купить новые и бу ПВХ окна/двери" />
         <meta
           name="keywords"
@@ -41,7 +43,7 @@ const HomePage: React.FC = () => {
           <SearchItem />
         </div>
         {
-          <h3 className="text-center max-w-full font-medium text-3xl mt-5">
+          <h3 className="text-center max-w-full font-medium text-xl xl:text-3xl mt-5">
             {category.value.replace(/["']/g, "") === "Все товары"
               ? "Все товары"
               : `Все товары в категории  ${category.value.replace(

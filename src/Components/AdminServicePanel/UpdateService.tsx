@@ -6,6 +6,7 @@ import {
 import MyButton from "../../UI/MyButton";
 import MyFileInput from "../../UI/MyFileInput";
 import MyInput from "../../UI/MyInput";
+import ErrorPage from "../Error";
 
 export interface Option {
   value: number;
@@ -47,7 +48,7 @@ const UpdateService: React.FC = () => {
   };
   return (
     <section className="mt-4 min-w-full">
-      {error && <h1>Произошла ошибка</h1>}
+      {error && <ErrorPage />}
       {isLoading && <h1>Товары загружаются</h1>}
       {_services.length >= 1 && (
         <div>

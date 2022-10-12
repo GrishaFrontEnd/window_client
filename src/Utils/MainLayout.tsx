@@ -1,6 +1,8 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import Categories from "../Components/Categories";
+import Downloader from "../Components/Downloader";
+import ErrorPage from "../Components/Error";
 import Footer from "../Components/Footer";
 import Header from "../Components/Header";
 import { useAppDispatch } from "../Hooks/Redux";
@@ -22,19 +24,24 @@ const MainLayout: React.FC = () => {
     }
   });
   if (error) {
-    return <h1>Произошла ошибка при загрузке сайта</h1>;
+    return <ErrorPage />;
   } else if (isLoading) {
-    return <h1>Идёт загрузка данных</h1>;
+    return <Downloader />;
   }
   return (
     <div className="max-w-screen-xl flex items-center flex-col min-h-screen mx-auto">
       <div className="flex w-full items-center flex-col flex-[1_0_auto]">
-        <div className="min-w-full">
+        <div className="min-w-full flex items-center justify-start">
+          <div className="block md:hidden">
+            <Categories />
+          </div>
           <Header />
         </div>
         <div className="w-full">
           <div className="max-w-full">
-            <Categories />
+            <div className="hidden md:block">
+              <Categories />
+            </div>
             <div className="mt-5 min-w-full mx-auto">
               <Outlet />
             </div>

@@ -6,6 +6,8 @@ import MyButton from "../../UI/MyButton";
 import MyFileInput from "../../UI/MyFileInput";
 import MyInput from "../../UI/MyInput";
 import randomNumber from "../../Utils/randomNumber";
+import Downloader from "../Downloader";
+import ErrorPage from "../Error";
 import DropdownCategory from "./DropdownCategory";
 import UpdateProperties from "./UpdateProperties";
 
@@ -112,14 +114,14 @@ const UpdateItemData: React.FC<IUpdateItemData> = ({ item_id, cat_id }) => {
     setProperties(_properties);
   };
   if (error) {
-    return <h1>Произошла ошибка...</h1>;
+    return <ErrorPage />;
   } else if (isLoading) {
-    return <h1>Идет загрузка...</h1>;
+    return <Downloader />;
   }
   return (
     <>
-      {error && <h1>Произошла ошибка...</h1>}
-      {isLoading && <h1>Идет загрузка...</h1>}
+      {error && <ErrorPage />}
+      {isLoading && <Downloader />}
       {item && (
         <section>
           <div>

@@ -1,16 +1,17 @@
 import React from "react";
 import { Helmet } from "react-helmet-async";
 import { useParams } from "react-router-dom";
+import Downloader from "../Components/Downloader";
+import ErrorPage from "../Components/Error";
 import { useFetchOneServiceByIdQuery } from "../Services/ServiceApi";
 
 const ServicePage: React.FC = () => {
   const { id } = useParams();
   const { data: service, error, isLoading } = useFetchOneServiceByIdQuery(+id);
   if (isLoading) {
-    return <h1>Идет загрузка</h1>;
+    return <Downloader />;
   } else if (error) {
-    alert(error);
-    <h1>Ошибка....</h1>;
+    return <ErrorPage />;
   }
   return (
     <section className="max-w-screen-xl min-w-full min-h-fit">

@@ -3,6 +3,8 @@ import { useFetchAllCategoriesQuery } from "../../Services/CategoriesApi";
 import { useCreatePropertyMutation } from "../../Services/PropertiesApi";
 import MyButton from "../../UI/MyButton";
 import MyInput from "../../UI/MyInput";
+import Downloader from "../Downloader";
+import ErrorPage from "../Error";
 
 const CreateProperty: React.FC = () => {
   const [property, setProperty] = React.useState<string>("");
@@ -27,10 +29,10 @@ const CreateProperty: React.FC = () => {
     } catch (err) {}
   };
   if (isLoading) {
-    return <h1>Идет загрузка</h1>;
+    return <Downloader />;
   }
   if (error) {
-    return <h1>Произошла ошибка</h1>;
+    return <ErrorPage />;
   }
   return (
     <section className="mt-4 min-w-full">

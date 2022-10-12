@@ -1,5 +1,6 @@
 import React from "react";
 import { useFetchPropertiesByCategoryQuery } from "../../Services/PropertiesApi";
+import ErrorPage from "../Error";
 
 export interface ISearchProperty {
   category_id: number;
@@ -20,7 +21,7 @@ const SearchProperty: React.FC<ISearchProperty> = ({
   React.useEffect(() => {}, [category_id]);
   return (
     <div className="">
-      {error && <h1>Произошла ошибка</h1>}
+      {error && <ErrorPage />}
       {isLoading && <h1>Загрузка</h1>}
       <div>
         <select

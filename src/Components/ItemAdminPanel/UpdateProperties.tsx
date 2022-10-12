@@ -2,6 +2,8 @@ import React from "react";
 import { useFetchItemByIdQuery } from "../../Services/ItemService";
 import MyButton from "../../UI/MyButton";
 import MyInput from "../../UI/MyInput";
+import Downloader from "../Downloader";
+import ErrorPage from "../Error";
 import DropdownProperties from "./DropdownProperties";
 
 interface IUpdateProperties {
@@ -31,8 +33,8 @@ const UpdateProperties: React.FC<IUpdateProperties> = ({
   const { data: item, error, isLoading } = useFetchItemByIdQuery(id);
   return (
     <div>
-      {error && <h1>Произошла ошибка</h1>}
-      {isLoading && <h1>Идет загрузка</h1>}
+      {error && <ErrorPage />}
+      {isLoading && <Downloader />}
       {item && (
         <div>
           {item._properties.map((item, index) => (

@@ -7,6 +7,9 @@ module.exports = {
         1: "1 0 auto",
         0: "0 0 auto",
       },
+      padding: {
+        "58%": "58%",
+      },
     },
   },
   plugins: [],

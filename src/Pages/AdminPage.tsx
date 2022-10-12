@@ -6,7 +6,7 @@ import { Helmet } from "react-helmet-async";
 
 const AdminPage: React.FC = () => {
   return (
-    <div className="max-w-6xl mx-auto w-screen">
+    <div className="max-w-6xl mx-auto w-screen p-2">
       <Helmet>
         <title>Админка</title>
         <meta name="description" content="Купить новые и бу ПВХ окна/двери" />
@@ -27,7 +27,7 @@ const AdminPage: React.FC = () => {
         </h1>
         <div></div>
       </header>
-      <div className="mt-6 max-w-6xl mx-auto flex">
+      <div className="mt-6 max-w-6xl mx-auto flex flex-col md:flex-col lg:flex">
         <AdminCategories />
         <div className="ml-7 min-w-full">
           <Outlet />

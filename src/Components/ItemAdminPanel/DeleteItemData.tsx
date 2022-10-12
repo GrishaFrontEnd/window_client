@@ -1,5 +1,7 @@
 import React from "react";
 import { useFetchItemByIdQuery } from "../../Services/ItemService";
+import Downloader from "../Downloader";
+import ErrorPage from "../Error";
 
 export interface IDeleteItemData {
   id: number;
@@ -9,8 +11,8 @@ const DeleteItemData: React.FC<IDeleteItemData> = ({ id }) => {
   const { data: item, error, isLoading } = useFetchItemByIdQuery(id);
   return (
     <div>
-      {error && <h1>Произошла ошибка</h1>}
-      {isLoading && <h1>Идёт загрузка...</h1>}
+      {error && <ErrorPage />}
+      {isLoading && <Downloader />}
       {item && (
         <section>
           <div>

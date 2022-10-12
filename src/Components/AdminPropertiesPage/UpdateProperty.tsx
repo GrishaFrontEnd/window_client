@@ -6,6 +6,8 @@ import {
 } from "../../Services/PropertiesApi";
 import MyButton from "../../UI/MyButton";
 import MyInput from "../../UI/MyInput";
+import Downloader from "../Downloader";
+import ErrorPage from "../Error";
 import SearchProperty from "./SearchProperty";
 
 const UpdateProperty: React.FC = () => {
@@ -38,10 +40,10 @@ const UpdateProperty: React.FC = () => {
     } catch (error) {}
   };
   if (error) {
-    return <h1>Произошла ошибка</h1>;
+    return <ErrorPage />;
   }
   if (isLoading) {
-    return <h1>Идет загрузка</h1>;
+    return <Downloader />;
   }
   return (
     <section className="mt-4 min-w-full">

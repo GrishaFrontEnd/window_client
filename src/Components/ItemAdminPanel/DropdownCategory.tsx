@@ -1,5 +1,7 @@
 import React from "react";
 import { useFetchAllCategoriesQuery } from "../../Services/CategoriesApi";
+import Downloader from "../Downloader";
+import ErrorPage from "../Error";
 
 export interface IDropdown {
   value: number;
@@ -10,10 +12,10 @@ const DropdownCategory: React.FC<IDropdown> = ({ value, onChange }) => {
   const { data: categories, error, isLoading } = useFetchAllCategoriesQuery();
 
   if (error) {
-    return <h1>Произошла ошибка</h1>;
+    return <ErrorPage />;
   }
   if (isLoading) {
-    return <h1>Идет загрузка</h1>;
+    return <Downloader />;
   }
   return (
     <div>
@@ -25,7 +27,7 @@ const DropdownCategory: React.FC<IDropdown> = ({ value, onChange }) => {
       >
         {categories.map((category, index) => {
           return (
-            <option key={category.id} value={category.id}>
+            <option key={index} value={category.id}>
               {category.value}
             </option>
           );

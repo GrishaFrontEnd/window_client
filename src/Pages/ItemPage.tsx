@@ -13,6 +13,8 @@ import { useAppSelector } from "../Hooks/Redux";
 import MyFileInput from "../UI/MyFileInput";
 import MyButton from "../UI/MyButton";
 import { FiPlus, FiMinus } from "react-icons/fi";
+import Downloader from "../Components/Downloader";
+import ErrorPage from "../Components/Error";
 
 const ItemPage: React.FC = () => {
   let { id } = useParams();
@@ -102,10 +104,10 @@ const ItemPage: React.FC = () => {
   // Изменение свойств
 
   if (isLoading) {
-    return <h1>Идет загрузка...</h1>;
+    return <Downloader />;
   }
   if (error) {
-    return <h1>Ошибка....</h1>;
+    return <ErrorPage />;
   }
   return (
     <section className="mx-auto max-h-fit max-w-screen-xl">
@@ -135,9 +137,9 @@ const ItemPage: React.FC = () => {
             <div>Цена: {item.item.price} руб</div>
           </div>
           <div>
-            <div className="overflow-hidden h-96">
+            <div className="relative pl-0 pt-0 pr-0 pb-[58%]">
               <img
-                className="w-full h-full object-contain object-center"
+                className="w-full h-full object-cover absolute top-0 left-0"
                 src={process.env.REACT_APP_API + "/" + item.item.image}
                 alt="Изображение товара"
               />

@@ -1,14 +1,16 @@
 import React from "react";
 import { useFetchAllItemsQuery } from "../../Services/ItemService";
+import Downloader from "../Downloader";
+import ErrorPage from "../Error";
 import CreateItem from "./CreateItem";
 import DeleteItem from "./DeleteItem";
 
 const ItemAdminPanel: React.FC = () => {
   const { data: serverResponse, error, isLoading } = useFetchAllItemsQuery("");
   if (error) {
-    return <h1>Произошла ошибка при загрузке товара</h1>;
+    return <ErrorPage />;
   } else if (isLoading) {
-    return <h1>Идёт загрузка товаров</h1>;
+    return <Downloader />;
   }
   return (
     <div className="ml-10 min-w-full flex-column">

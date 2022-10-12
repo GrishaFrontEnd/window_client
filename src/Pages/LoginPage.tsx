@@ -58,7 +58,7 @@ const LoginPage: React.FC = () => {
         />
       </Helmet>
       <div className="flex-[1_0_auto] flex items-center">
-        <div className="border-2 p-6 border-lime-400 self-center ">
+        <div className=" p-6 self-center ">
           <h1 className="mb-10 text-center text-3xl font-bold">Авторизация</h1>
           <MyInput value={email} onChange={onChangeLogin} placeholder="Логин" />
           <MyInput

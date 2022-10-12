@@ -5,6 +5,8 @@ import {
 } from "../../Services/CategoriesApi";
 import MyButton from "../../UI/MyButton";
 import MyInput from "../../UI/MyInput";
+import Downloader from "../Downloader";
+import ErrorPage from "../Error";
 
 const AdminUpdateCategory: React.FC = () => {
   const {
@@ -33,9 +35,9 @@ const AdminUpdateCategory: React.FC = () => {
     } catch (error) {}
   };
   if (error) {
-    return <h1>Ошибка</h1>;
+    return <ErrorPage />;
   } else if (isLoading) {
-    return <h1>Идет загрузка</h1>;
+    return <Downloader />;
   }
   return (
     <div className="mt-4 min-w-full">

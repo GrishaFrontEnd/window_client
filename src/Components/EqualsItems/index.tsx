@@ -2,6 +2,8 @@ import React from "react";
 import { FaLongArrowAltLeft, FaLongArrowAltRight } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import { useFetchAllItemsQuery } from "../../Services/ItemService";
+import Downloader from "../Downloader";
+import ErrorPage from "../Error";
 
 export interface IEqualItemsProps {
   category: number;
@@ -25,8 +27,8 @@ const EqualsItems: React.FC<IEqualItemsProps> = ({ category }) => {
   }, [category]);
   return (
     <div>
-      {error && <h1>Произошла ошибка при загрузке файлов</h1>}
-      {isLoading && <h1>Идет загрузка товаров</h1>}
+      {error && <ErrorPage />}
+      {isLoading && <Downloader />}
       {serverResponse?.rows?.length && (
         <section className="min-w-full my-10">
           <div className="flex flex-col items-center">

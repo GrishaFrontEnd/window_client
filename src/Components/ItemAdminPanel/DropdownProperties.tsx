@@ -1,5 +1,7 @@
 import React from "react";
 import { useFetchPropertiesByCategoryQuery } from "../../Services/PropertiesApi";
+import Downloader from "../Downloader";
+import ErrorPage from "../Error";
 
 export interface IDropdownProperties {
   value: string;
@@ -22,11 +24,11 @@ const DropdownProperties: React.FC<IDropdownProperties> = ({
     refetch();
   }, [category_id]);
   if (error) {
-    return <h1>Произошла ошибка</h1>;
+    return <ErrorPage />;
   }
 
   if (isLoading) {
-    return <h1>Идет загрузка</h1>;
+    return <Downloader />;
   }
 
   return (

@@ -7,6 +7,8 @@ import {
 } from "../../Services/ServiceApi";
 import { removeService, setServices } from "../../Store/Slices/ServiceSlice";
 import MyButton from "../../UI/MyButton";
+import Downloader from "../Downloader";
+import ErrorPage from "../Error";
 
 const DeleteService: React.FC = () => {
   const navigate = useNavigate();
@@ -34,9 +36,9 @@ const DeleteService: React.FC = () => {
     } catch (error) {}
   };
   if (error) {
-    return <h1>Произошла ошибка при загрузке данных</h1>;
+    return <ErrorPage />;
   } else if (isLoading) {
-    return <h1>Идет загрузка данных</h1>;
+    return <Downloader />;
   }
   return (
     <section className="mt-4 min-w-full">

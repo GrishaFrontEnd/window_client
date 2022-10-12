@@ -9,7 +9,7 @@ import { NavLink } from "react-router-dom";
 
 const AdminCategories: React.FC = () => {
   return (
-    <div>
+    <div className="mb-3">
       <ul className="border border-lime-900 rounded-lg p-3 text-xl">
         <li className="my-2 font-semibold hover:rounded-lg hover:text-white hover:bg-lime-400 p-3">
           <NavLink to="/admin_panel" className="flex items-center">
